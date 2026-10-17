@@ -1,0 +1,861 @@
+{
+  "world_tiles": 590492,
+  "land_tiles": 50810,
+  "sea_tiles": 539682,
+  "islands": {
+    "Honshu": 42092,
+    "Kyushu": 4964,
+    "Awaji": 119,
+    "Amakusa_shimoshima": 34,
+    "Shikoku": 3107,
+    "Shodoshima": 27,
+    "Tsushima_south": 46,
+    "Sado": 161,
+    "Tsushima": 87,
+    "Suo_Oshima": 22,
+    "Amakusa": 76,
+    "Oki": 51,
+    "Iki": 24
+  },
+  "island_dem_coverage": {
+    "Amakusa": {
+      "land_tiles": 76,
+      "sampled_elevation_count": 76,
+      "missing_elevation_count": 0,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 76
+      },
+      "coverage_percent": 100.0
+    },
+    "Amakusa_shimoshima": {
+      "land_tiles": 34,
+      "sampled_elevation_count": 32,
+      "missing_elevation_count": 2,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 34
+      },
+      "coverage_percent": 94.118
+    },
+    "Awaji": {
+      "land_tiles": 119,
+      "sampled_elevation_count": 117,
+      "missing_elevation_count": 2,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 119
+      },
+      "coverage_percent": 98.319
+    },
+    "Honshu": {
+      "land_tiles": 42092,
+      "sampled_elevation_count": 41916,
+      "missing_elevation_count": 106,
+      "negative_gsi_land_conflict_count": 70,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 24950,
+        "AMJ_CoolTemperateForest": 12558,
+        "AMJ_SubalpineForest": 4529,
+        "AMJ_AlpineZone": 55
+      },
+      "coverage_percent": 99.582
+    },
+    "Iki": {
+      "land_tiles": 24,
+      "sampled_elevation_count": 23,
+      "missing_elevation_count": 1,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 24
+      },
+      "coverage_percent": 95.833
+    },
+    "Kyushu": {
+      "land_tiles": 4964,
+      "sampled_elevation_count": 4938,
+      "missing_elevation_count": 25,
+      "negative_gsi_land_conflict_count": 1,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 4849,
+        "AMJ_CoolTemperateForest": 113,
+        "AMJ_SubalpineForest": 2
+      },
+      "coverage_percent": 99.476
+    },
+    "Oki": {
+      "land_tiles": 51,
+      "sampled_elevation_count": 48,
+      "missing_elevation_count": 3,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 51
+      },
+      "coverage_percent": 94.118
+    },
+    "Sado": {
+      "land_tiles": 161,
+      "sampled_elevation_count": 158,
+      "missing_elevation_count": 3,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 106,
+        "AMJ_CoolTemperateForest": 54,
+        "AMJ_SubalpineForest": 1
+      },
+      "coverage_percent": 98.137
+    },
+    "Shikoku": {
+      "land_tiles": 3107,
+      "sampled_elevation_count": 3096,
+      "missing_elevation_count": 11,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 2623,
+        "AMJ_CoolTemperateForest": 454,
+        "AMJ_SubalpineForest": 30
+      },
+      "coverage_percent": 99.646
+    },
+    "Shodoshima": {
+      "land_tiles": 27,
+      "sampled_elevation_count": 27,
+      "missing_elevation_count": 0,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 27
+      },
+      "coverage_percent": 100.0
+    },
+    "Suo_Oshima": {
+      "land_tiles": 22,
+      "sampled_elevation_count": 20,
+      "missing_elevation_count": 2,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 22
+      },
+      "coverage_percent": 90.909
+    },
+    "Tsushima": {
+      "land_tiles": 87,
+      "sampled_elevation_count": 83,
+      "missing_elevation_count": 4,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 87
+      },
+      "coverage_percent": 95.402
+    },
+    "Tsushima_south": {
+      "land_tiles": 46,
+      "sampled_elevation_count": 45,
+      "missing_elevation_count": 1,
+      "negative_gsi_land_conflict_count": 0,
+      "proposed_biome_counts": {
+        "AMJ_WarmTemperateForest": 46
+      },
+      "coverage_percent": 97.826
+    }
+  },
+  "status": "PARTIAL_RESEARCH",
+  "source": "GSI dem_png DEM10B z9 / Fundamental Geospatial Data-derived elevations; modern data",
+  "original_pngs_redistributed": false,
+  "hist_wetland_inferred": false,
+  "climate_model": "JMA 1991-2020 twelve-station monthly mean temperature, nearest-four IDW, altitude lapse .00625C/m; no historical correction",
+  "temperature_monthly_observations_are_per_tile": false,
+  "temperature_source": "https://www.data.jma.go.jp/stats/en/normal/normal.html",
+  "temperature_northern_honshu_source": "https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php",
+  "jma_station_monthly_temperature_c": {
+    "Aomori": [
+      -0.9,
+      -0.4,
+      2.8,
+      8.5,
+      13.7,
+      17.6,
+      21.8,
+      23.5,
+      19.9,
+      13.5,
+      7.2,
+      1.4
+    ],
+    "Morioka": [
+      -1.6,
+      -0.9,
+      2.6,
+      8.7,
+      14.5,
+      18.8,
+      22.4,
+      23.5,
+      19.3,
+      12.6,
+      6.2,
+      0.8
+    ],
+    "Akita": [
+      0.4,
+      0.8,
+      4.0,
+      9.6,
+      15.2,
+      19.6,
+      23.4,
+      25.0,
+      21.0,
+      14.5,
+      8.3,
+      2.8
+    ],
+    "Sendai": [
+      2.0,
+      2.4,
+      5.5,
+      10.7,
+      15.6,
+      19.2,
+      22.9,
+      24.4,
+      21.2,
+      15.7,
+      9.8,
+      4.5
+    ],
+    "Niigata": [
+      2.5,
+      3.1,
+      6.2,
+      11.3,
+      16.7,
+      20.9,
+      24.9,
+      26.5,
+      22.5,
+      16.7,
+      10.5,
+      5.3
+    ],
+    "Nagoya": [
+      4.8,
+      5.5,
+      9.2,
+      14.6,
+      19.4,
+      23.0,
+      26.9,
+      28.2,
+      24.5,
+      18.6,
+      12.6,
+      7.2
+    ],
+    "Tokyo": [
+      5.4,
+      6.1,
+      9.4,
+      14.3,
+      18.8,
+      21.9,
+      25.7,
+      26.9,
+      23.3,
+      18.0,
+      12.5,
+      7.7
+    ],
+    "Hiroshima": [
+      5.4,
+      6.2,
+      9.5,
+      14.8,
+      19.6,
+      23.2,
+      27.2,
+      28.5,
+      24.7,
+      18.8,
+      12.9,
+      7.5
+    ],
+    "Osaka": [
+      6.2,
+      6.6,
+      9.9,
+      15.2,
+      20.1,
+      23.6,
+      27.7,
+      29.0,
+      25.2,
+      19.5,
+      13.8,
+      8.7
+    ],
+    "Takamatsu": [
+      5.9,
+      6.3,
+      9.4,
+      14.7,
+      19.8,
+      23.3,
+      27.5,
+      28.6,
+      24.7,
+      19.0,
+      13.2,
+      8.1
+    ],
+    "Fukuoka": [
+      6.9,
+      7.8,
+      10.8,
+      15.4,
+      19.9,
+      23.3,
+      27.4,
+      28.4,
+      24.7,
+      19.6,
+      14.2,
+      9.1
+    ],
+    "Kagoshima": [
+      8.7,
+      9.9,
+      12.8,
+      17.1,
+      21.0,
+      24.0,
+      28.1,
+      28.8,
+      26.3,
+      21.6,
+      16.2,
+      10.9
+    ]
+  },
+  "biome_model": "Environment canonical annual mean: alpine T<0C, subalpine 0<=T<8C; above 8C the existing Kira WI>=85 and CI>=-10 gate retains warm evergreen eligibility, else cool; neither quota nor historical observations",
+  "biome_warmth_index_c_month": [
+    85.0
+  ],
+  "highland_annual_mean_c_thresholds": [
+    0.0,
+    8.0
+  ],
+  "warm_temperate_coldness_index_min_c_month": -10.0,
+  "modeled_warmth_index_range_c_month": [
+    0.2,
+    165.317
+  ],
+  "modeled_coldness_index_range_c_month": [
+    -134.885,
+    0.0
+  ],
+  "missing_dem_biome_uses_playable_1m_fallback": true,
+  "requested_source_tiles": 130,
+  "downloaded_source_tiles": 130,
+  "source_sha256_by_tile": {
+    "439/203": "6d36b6d99a7b655ba48c7ba7928f426a5014eab115b6d71d86fceab6acdd4d9e",
+    "439/204": "430e77e9ae4e8c9f3abbc9881a7209b3027a1cb902152404be82ee3874ae8890",
+    "440/203": "951e4d74f5abf291e12d28f0e80ac78f97ad60d91801c896568a6da6e33877d3",
+    "440/204": "258e4dd2dea9a870b2dbf67a5c25c484de4d2679961c2f0b03958d7d0b3ad225",
+    "440/205": "2f8b108ecf935c41a24e042c3c11a9f2aa71d897d79650d6ddc6e20d707d6843",
+    "440/206": "070f51075db83c648908b2063f8553cb37423fbd0cd541d86cd2f9d36e9646bc",
+    "440/207": "7cee68afe017ad668ac9fb734b477dfd571d391dd6f8a72d334d8a2532035008",
+    "441/204": "dba013fcfb0729f2911906ee08827fd056d893993959c7a206c808a5e4537f43",
+    "441/205": "957ca4874d826ba021822ada40696d36fbe97a5de05e31e724d61da2241059ba",
+    "441/206": "3e2185f39daabdbf596587f91bbe122e72c6057030c12c8c1736ae1b68ab452b",
+    "441/207": "fb93ae6ac64f30f59301c64d3afda658a5fc0d235b3981ae0ef702ac061ae6a3",
+    "441/208": "c0f1558c98444f7a132d7dbe1dab954bc16488aed9871bde03a44cae2996e483",
+    "441/209": "f384741f2aa6efddaac1a62eb5027e3ba52f84285afa84e0cd4787fd3fce29fe",
+    "442/203": "d262373fa68b5478e2722346d1e2094bff2a9dfa94a6ba586ff4db9ef4cf646b",
+    "442/204": "abb57cf8fc0cd13082de59ec727402be29c484946b622e6302733eb7a6d509c5",
+    "442/205": "18319102cb1dae7962df58ae357e024d019c76e3f0fa43a170d734d2ce528e83",
+    "442/206": "2ea5b0dcaa266bc7e04e52a3fada41bd506f8c97b4a3d82a1f421a0793617942",
+    "442/207": "4ff72e459af5e00f8ed68d5f1ba2a6d9ff12e33fdab3f96a2e89fa2f4a5049b6",
+    "442/208": "09400df41fdb261102283badc37efa2497d037f14c2e9490e22f66e7ce536e81",
+    "442/209": "69dd7a24dd3cb3f348d71cd0427b1004282f7b5ee208a7ee7fdf26d6f12d59fc",
+    "443/202": "961c044e41bc9a48d57cb7cf505326e36e91427d6312da781a23bf84f525fa4a",
+    "443/203": "dd3860937010ea75b97687ca8d3917e091e05f0708b5175d9a8c81b227953512",
+    "443/204": "5c514e53a27e39e5e781945c39f8e98145216c011ff571182a4adbed6e475e91",
+    "443/205": "e0ecf4349cada862e2f8d5a36180d01969f4f2ddced5f299cd97c7b6accb7061",
+    "443/206": "a58a2644c2fb233a2b02226880ce2281a6556a932a0b6b68b5d26645991349ce",
+    "443/207": "3df5d5ebb14da6a1a2ce4f88bb062b423b4d07705ff50c5a57020a9f195c6766",
+    "444/201": "3561c5e1f4575ba808b0ec3d0f6c53eff6becc90a1f1b5a59df028b711ef5419",
+    "444/202": "49d8c446c92ddd4a4e36022d63c2d5c909fcd3fb341b5101141f1913a9793161",
+    "444/203": "68852718eca34fb702b298c9b0ec84a16f4ba63a0f23a0797e9e88aeb3554bef",
+    "444/204": "0cff326e39a28b868e2fb551ca52ec41549ffc04bce7146182b18a374730650f",
+    "444/205": "aadf7ca18ba50b93e4e7364c2129c5fe5e249e6482e3ea8273e6e20c654cf835",
+    "444/206": "b39684e808113dd526d6c33d6094273e8df81a5e2e65428623b94559a7518514",
+    "445/200": "5fcae50b75aba8a534f26f1382a780ef702721ed09b8e97bd05238a3d7add405",
+    "445/201": "47244b30c917a9ef4123134b459f9e48371c6f9c2a75dfcb8b3cff298250a3b1",
+    "445/202": "3fe55ddef60c0c50bd631a270fd322a743de2ee70205677e88bfbdde2f5fb6b4",
+    "445/203": "09ec55c9bfe5801612c966ba613791129b7a8f3703ed43c8e45c3651b2b67246",
+    "445/204": "60cd08a11058a65fc9b4dd2a73336ebd43c9ab80ed64b9b8634ce80c2aacc81d",
+    "445/205": "07da25478dbeac4836e24b05a777b6221c027e19779b46872e22ccd1fa1e2c3b",
+    "445/206": "69258c60398eaf0bae2b9fadc4346cb5a1bf415420fc5cc4c00f1e4f5423e4bd",
+    "446/201": "79bb2e0b2c8d0f74f819912885fe5084c00a0528221ee6b45cdbd1f222043aec",
+    "446/202": "968f0cd93ac429019735dff91b81ea1e16078fe934ce60ef2d8443899b80490f",
+    "446/203": "39731a20aea6fea7c02f19245b958d85679a733c321eaa6b1ad217eb0d12f1c2",
+    "446/204": "76afde5cc06694b444beef986ae759ed32743aef5c82cf697174fab6913c5c0a",
+    "446/205": "d39c75dc40a4ee9ed1eaf8f5d1cec79a95d232f07864fd8ff11c3ad8807b1b27",
+    "447/201": "d91dd241c5d79be1f042d1f9a907cb6e1b902cb9fd4490282d162f383466a68e",
+    "447/202": "68d20c59f661f05f825a7a2980e8b2c95f9559bd11faab87186ab9cc5b254be7",
+    "447/203": "9c1ed3f6c97cd612ddd8a69145b29e45bc6be05b371b49c7e0be3046248f033f",
+    "447/204": "6a27311f372bade585fac6be4f6a557542bbc058bd5e263aff285a56ef8bc686",
+    "447/205": "0f8f98c7802130dfe6ac4d94ac069affd976c84ffcfda14cd0f62084ee766371",
+    "448/201": "6eae20f360e34469150bbbe7b66bfc5a339f65726193e9c112c5b59240102960",
+    "448/202": "2de700baa84a1e9dfa56fc7a78ee0d7b1312c3cbbb9a9f9afbc177a3c7a8bd2d",
+    "448/203": "8466e546855572786455280a85e1d638788750e82887eb926f5b267cf0fe2177",
+    "448/204": "eaab89602d426f686938d8799e069e6bd579fbf86e7c614ff37dc494b6597f67",
+    "448/205": "85bcdc10d58a4254dbc3f50e2b1d9f045add284bff04c233f285ccc1f3ac0d18",
+    "449/200": "1a44075faed919c5b039baf37abf6a12290b351284d7ffcb49f5a3a8b9a42489",
+    "449/201": "46c3c24ffa700ad4c9268e1ebf711cb0852e9fc61a7b10d54ba1d6e870941d14",
+    "449/202": "38b11404820f241f767a6ecf4d7aacc3e840fc3f65a824fcbe6262f0c78f397b",
+    "449/203": "c582386ecd5953826a969002c60b17a987499152df39e82c065429312d716a28",
+    "449/204": "22e46d83c169c0a93e32195da6a19fc90c618750b93269bf1724a2d4f6cb53dd",
+    "449/205": "00179119d68ec0d5892ba46c2c28ca83d4a5720fcf33a6380b862497b01d2267",
+    "450/198": "b1835801c0b17d07ae901a860b0d5374b8e8766709d8c2250dfe1926bf9c0a10",
+    "450/199": "19045f5d02bac147f948cb9586380f6976e9bb3a03c73306e7c815fc1ee789cc",
+    "450/200": "0f1e5a91f6e8d18bb1c71bc3083b637f1686d165a693aefc355c1f6f7f2ff081",
+    "450/201": "2055cc416b5b8d5aeb64916724c6d0a55f92bf5c34f6da1a80efd19b8ad5d209",
+    "450/202": "fda746f2c4aec95b0b0bc7f657e08df617b98522e41a59c698a01e6f7267c0da",
+    "450/203": "dd2c11646bb27fd90a32a962ed3f7178c885f0ac76c3662d841f6b2e05bbd430",
+    "450/204": "3a9b0d2e820d338d5cd0d48f91f308ff0490d1bec6d09b64f1383c6c4aa95681",
+    "451/198": "25490dc352abd6acef5eda68db98d4e5e6a3aef8baf123af1f74ca3e9f424932",
+    "451/199": "6ccdc64bef43f91030ea0311c9f7a5a6d97f06d848ddf54c0ca2a6016c4b984c",
+    "451/200": "81a9a98a99d8e6406c109077e91ecb3b03e0c3fe619ef2223e71dce2834b5bc5",
+    "451/201": "c3de752f8668c3713a54433a3e7627243360e6b2bdee02853a6dc20dda5a1882",
+    "451/202": "6c53635053f5261b8777dd1a9a0ced1e41163c234dc19ce38c0915a04c6f33bc",
+    "451/203": "674b3ed8c2ed20f3b0a16075ec13cd13d3fd8dc57a23386dd00a49585ea350d3",
+    "452/196": "171617500d5c1c5fe92b255c927668960d9ddab0a07f9ff9fede106ee83e04d5",
+    "452/197": "7d16f4236d85fbe785ccebadd02da87b942c70df5df21c6048910943d10b124d",
+    "452/198": "c21bdef5d9f571e5bf6507244bba8932f2d957a44ee5e63348333df62a00788c",
+    "452/199": "4fe242f7ae53908b505c399fb0b89190364a6b0d418e5dcd2333ba79d41bbe9a",
+    "452/200": "a553116a043235e429a00827afdaee549ac70ee134ed68b8bd0b5f92235e4003",
+    "452/201": "7ffa6b755a8d8bc7378d04a1d1dece020a2214ef38799c189c464cf12601fe92",
+    "452/202": "cc8439e82924e424d2f53f587a4cbe7d197a97177431bd8fcbb2cd75c78c15ab",
+    "452/203": "917fb57dcff01d52b6790981a2dc65c0ac65a7932f62473589e2c849d2d9b5f1",
+    "453/197": "e38cb9982d054e40acb1598f30f9c6989f00665dcad95eea43f2cff54cf722b8",
+    "453/198": "73120dd4581fe8d44534beddb4e16f01c751b110ed35051219379b9122a37ba4",
+    "453/199": "b7125ba734e74f96b5e79cad1d2ee994695905b78d5363712d8f75386b2de2bb",
+    "453/200": "046f5d1753cd64baa9d59edebc8a09154f674cacb1b7a5efb5281b3bc0164c40",
+    "453/201": "258225e2d8a4f70b66e3264ea80f851bd4dbf039ed795bdf2cf9ab7342b9a1ce",
+    "453/202": "7098b3dd64955a6f527d32e31ef9364a94d5133c1429cc7317402eb2055df328",
+    "453/203": "498175571a56145406ec934c9db8e26ba782aef8e83b120eebb2ffc6bd2c6a45",
+    "454/192": "ff4e06cdb8ee7675596c787b21249b1bcd8d0bcbf044de3c4cac5479d7b2d991",
+    "454/193": "7c65aeb4d0554fe1be9d466f1fb0dfd9c0f032ba437e52f92e0a02bce9888574",
+    "454/194": "c053e0a210d6b930f6e1c77d2cc34491f27100ee16d0699be94217f055412f8d",
+    "454/195": "2519e9269c96a3ba31c5c8331222b9c1fb23f88475b5d185c36a6ba2f3e399e1",
+    "454/196": "932315e19cb3cb29b11dbf984ecaadae41a8404347791c89bc1681e9080cae01",
+    "454/197": "07470128c1620dbb046d8bf29939f9666adcc39c5fbea0175cb016c2fa69d8d5",
+    "454/198": "c81630e8b1e873674eb23b735273a4edaae05907827486305f201b72fb60a5be",
+    "454/199": "baa0152c3ff172a02a67e64009f68bea5480924a12f88f30b14f8c4543369a9e",
+    "454/200": "6ac40235414995d114e133f4ca7c447e9f974eda4bc5e24016b00743923eb618",
+    "454/201": "81e70bbb074d52cc253c6ba9fd12cd62f8e8f785a8f7c7eff4fb0258139005aa",
+    "454/202": "6b06b1676617f9b976746b56059c3819f4c8c015abaa32302e9cc57a0827c710",
+    "455/191": "9551ba8160644ad5eac17023d0b8511e258d20afdffde454388ddbcef6161876",
+    "455/192": "23b2e5fc0aeded8b841c59ead5269e3b87111c50627e78f46d359bac907e223c",
+    "455/193": "b2254ad188008b30015f72ae7e29817ac5a65864602a199a4e508994471cd95f",
+    "455/194": "071a0d289d3c9f4143ff1fec1ed0d8a27735b5d1ee3d3930a9f636e40254c9cc",
+    "455/195": "ab979c3f5cfac7d1f988f62566490a0dc1651b7279975acc95fefec756e4f297",
+    "455/196": "900cc40c33511e1e2ad466c32c14b96d5ac4adda121c43ce0f3c375e40f010bc",
+    "455/197": "3382bbe0bb107d590a80b5b1dde28d43acbd7c1c4c204621f50dceabd31ee519",
+    "455/198": "27ed0d11000d67ea77dfe7e04ef1c165290495a8c959410e25f417199cfa6ffa",
+    "455/199": "c6651af6daf48dd78cb51523dd6f392d9e1cb61c525b692baf70d46eda9d4961",
+    "455/200": "a1b1deb4b50b8abfdc9fdf64c2f9a422ff5c10aeb367f14289286f09c82b8c43",
+    "455/201": "a68d9f09ed3e696cf9a181f8702629aa5a56c5fcd74ba1abeba50f8f3817196b",
+    "455/202": "a89e717c1003157a2b0da13856492d59b07775dd3278b66dae76986b2811aa40",
+    "456/190": "5c4df27fb8a730641dd02ef50adec5d86dc393f0b7f19d8246bda1e4b48cb1af",
+    "456/191": "99c907ec1daf4ae6e72e2421d79b9314e2dcc7d1453bd1159cf7eeb15e9d2ffe",
+    "456/192": "8c51ec584e67b040347a5bc34a4793687c7b9290b6277ea434f6bf9dada0e33c",
+    "456/193": "d3c2d26a5455165ae5449f52574cb21dd3f942c32a50f3e7a8ef511f2fa587ae",
+    "456/194": "cd39d54dc8d2ae71a7dfd8617080a665e0156e30ebed96f1f5d7ae37d4d90df9",
+    "456/195": "0e2242e8df88cbdd493a272fbc203810af5c4f7953551cf6a21a0779d03b6eb8",
+    "456/196": "165f9cf8e3bf3b5a59f102cb351f54839a09cfeb2be71a120a0eb80a36d81cdc",
+    "456/197": "3af40baecb68e769b1c3b4705b90094481f233cd323e845b2651ca69fa6a0a5f",
+    "456/198": "5c09473f79a00ffc68e1aeee37bd2938cd48ee28e6d1b9009dd57ced5c402d96",
+    "456/199": "45fc54765c683e0da762926915ebae47da60737d33f8d09961d5f014b2f75ae1",
+    "456/200": "f92434406d07211a46479a6401af71770cd94a1b612f99c3cacc04f3bb83734e",
+    "456/201": "b78e9f5477e5e36c9f8c2a8e2d0e3a45b84fb7bf2df78d235caed73559339cee",
+    "457/191": "8c4005b5dd14a2289947542fc00fd64e213af4996fc8e2e81dbf25c5401e5f86",
+    "457/192": "083a964493d4f60aa08cfd6005e74900516f669fb638ba371451a1989bbbe456",
+    "457/193": "7f006a81d30c30a9410fcdbf024640085c93cc1b608c8a22b8ddc9c09ad69486",
+    "457/194": "8960bdcb587b10a6f8a62238301b9ec5d088346c955da4e6e4158ca63c661faa",
+    "457/195": "c5342bad56c939169bfd31dcc310d6a68b7b994ea7c115589db1a7c9829526b1",
+    "457/196": "acf5b8fa2972082181e11d2367725e7323406253696d9077a7941915f1da75dc",
+    "458/194": "16b00b55db3a98afddb8885f523c25ad1ac471f3d9c5e0a55c95bbcba2b316a3"
+  },
+  "unavailable_source_tiles": [],
+  "invalid_or_no_data_land_tiles": 231,
+  "sampled_elevation_count": 50579,
+  "gap_reason_counts": {
+    "NEGATIVE_GSI_LAND_CONFLICT": 71,
+    "DEM_PIXEL_NO_DATA": 160
+  },
+  "gap_review_sample": [
+    {
+      "tile_id": 261,
+      "island": "Honshu",
+      "gis_longitude": 136.779421,
+      "gis_latitude": 35.104493,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 3967,
+      "island": "Shikoku",
+      "gis_longitude": 133.168732,
+      "gis_latitude": 33.139017,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 5564,
+      "island": "Kyushu",
+      "gis_longitude": 130.69245,
+      "gis_latitude": 31.1004,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 10237,
+      "island": "Honshu",
+      "gis_longitude": 139.98831,
+      "gis_latitude": 40.001465,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "NEGATIVE_GSI_LAND_CONFLICT",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 11082,
+      "island": "Honshu",
+      "gis_longitude": 134.136345,
+      "gis_latitude": 34.611768,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 16862,
+      "island": "Honshu",
+      "gis_longitude": 139.859086,
+      "gis_latitude": 35.708036,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 23393,
+      "island": "Amakusa_shimoshima",
+      "gis_longitude": 130.451087,
+      "gis_latitude": 32.524135,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 23428,
+      "island": "Honshu",
+      "gis_longitude": 136.778295,
+      "gis_latitude": 35.170395,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "NEGATIVE_GSI_LAND_CONFLICT",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 23429,
+      "island": "Honshu",
+      "gis_longitude": 136.849676,
+      "gis_latitude": 35.135302,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 29375,
+      "island": "Honshu",
+      "gis_longitude": 139.662148,
+      "gis_latitude": 35.170182,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 29416,
+      "island": "Honshu",
+      "gis_longitude": 141.033654,
+      "gis_latitude": 37.560361,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 29703,
+      "island": "Tsushima",
+      "gis_longitude": 129.292983,
+      "gis_latitude": 34.34798,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 35807,
+      "island": "Kyushu",
+      "gis_longitude": 131.85458,
+      "gis_latitude": 32.704806,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 35918,
+      "island": "Shikoku",
+      "gis_longitude": 132.503078,
+      "gis_latitude": 33.265677,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 40845,
+      "island": "Honshu",
+      "gis_longitude": 136.282109,
+      "gis_latitude": 34.137292,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 40947,
+      "island": "Awaji",
+      "gis_longitude": 134.710092,
+      "gis_latitude": 34.327513,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 45606,
+      "island": "Honshu",
+      "gis_longitude": 132.539457,
+      "gis_latitude": 34.088674,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 47621,
+      "island": "Honshu",
+      "gis_longitude": 140.332391,
+      "gis_latitude": 35.969348,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 50070,
+      "island": "Honshu",
+      "gis_longitude": 134.015331,
+      "gis_latitude": 35.531093,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 50137,
+      "island": "Oki",
+      "gis_longitude": 133.183653,
+      "gis_latitude": 36.273449,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 53958,
+      "island": "Honshu",
+      "gis_longitude": 140.990683,
+      "gis_latitude": 40.943868,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "MISSING_ELEVATION",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 54099,
+      "island": "Honshu",
+      "gis_longitude": 140.007414,
+      "gis_latitude": 40.066905,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "NEGATIVE_GSI_LAND_CONFLICT",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 55849,
+      "island": "Kyushu",
+      "gis_longitude": 129.658589,
+      "gis_latitude": 33.135625,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 59985,
+      "island": "Shikoku",
+      "gis_longitude": 132.772235,
+      "gis_latitude": 32.749917,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 67168,
+      "island": "Honshu",
+      "gis_longitude": 136.755234,
+      "gis_latitude": 35.138173,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "NEGATIVE_GSI_LAND_CONFLICT",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 67169,
+      "island": "Honshu",
+      "gis_longitude": 136.802455,
+      "gis_latitude": 35.136704,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "NEGATIVE_GSI_LAND_CONFLICT",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 67170,
+      "island": "Honshu",
+      "gis_longitude": 136.826692,
+      "gis_latitude": 35.103025,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 67171,
+      "island": "Honshu",
+      "gis_longitude": 136.803718,
+      "gis_latitude": 35.070875,
+      "reason": "NEGATIVE_GSI_LAND_CONFLICT",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 72642,
+      "island": "Honshu",
+      "gis_longitude": 133.72547,
+      "gis_latitude": 34.495373,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    },
+    {
+      "tile_id": 73125,
+      "island": "Honshu",
+      "gis_longitude": 139.049082,
+      "gis_latitude": 34.773079,
+      "reason": "DEM_PIXEL_NO_DATA",
+      "resolved_quality": "LOCAL_DEM_ESTIMATE",
+      "next_step": "REVIEW_GSI_HIGH_RES_AND_COAST"
+    }
+  ],
+  "gap_sample_truncated": true,
+  "gaps_resolved_by_interpolation": 204,
+  "unresolved_dem_land_tiles": 27,
+  "modeled_dem_estimate_count": 204,
+  "rainfall_model": "JMA 1991-2020 annual station normals, nearest-four IDW (modern, no orographic correction)",
+  "rainfall_observations_are_per_tile": false,
+  "modeled_rainfall_range_mm": [
+    1151.05,
+    2664.88
+  ],
+  "modeled_rainfall_land_cells": 50810,
+  "rainfall_station_source": "https://www.data.jma.go.jp/stats/en/normal/normal.html",
+  "jma_station_annual_normals_mm": {
+    "Sendai": 1276.7,
+    "Niigata": 1845.9,
+    "Kanazawa": 2401.5,
+    "Tokyo": 1598.2,
+    "Nagoya": 1578.9,
+    "Matsue": 1791.9,
+    "Osaka": 1338.3,
+    "Takamatsu": 1150.1,
+    "Hiroshima": 1572.2,
+    "Kochi": 2666.4,
+    "Fukuoka": 1686.9,
+    "Kagoshima": 2434.7
+  },
+  "proposed_biome_counts": {
+    "AMJ_WarmTemperateForest": 33014,
+    "AMJ_CoolTemperateForest": 13179,
+    "AMJ_SubalpineForest": 4562,
+    "AMJ_AlpineZone": 55
+  },
+  "national_coverage_percent": 99.545,
+  "elevation_resolution_checkpoints": {
+    "Kyushu_lowland": {
+      "gis_longitude": 130.56,
+      "gis_latitude": 31.6,
+      "reference_dem10b_z12_m": 4.67,
+      "sample_dem10b_z9_m": 5.11,
+      "z9_minus_reference_m": 0.44,
+      "status": "COMPARE_ONLY"
+    },
+    "Northern_Honshu": {
+      "gis_longitude": 140.0,
+      "gis_latitude": 39.0,
+      "reference_dem10b_z12_m": 233.39,
+      "sample_dem10b_z9_m": 246.29,
+      "z9_minus_reference_m": 12.9,
+      "status": "COMPARE_ONLY"
+    },
+    "Japan_Alps": {
+      "gis_longitude": 137.6,
+      "gis_latitude": 36.1,
+      "reference_dem10b_z12_m": 1633.42,
+      "sample_dem10b_z9_m": 1686.06,
+      "z9_minus_reference_m": 52.64,
+      "status": "COMPARE_ONLY"
+    },
+    "Fuji": {
+      "gis_longitude": 138.727,
+      "gis_latitude": 35.36,
+      "reference_dem10b_z12_m": 3740.44,
+      "sample_dem10b_z9_m": 3670.54,
+      "z9_minus_reference_m": -69.9,
+      "status": "COMPARE_ONLY"
+    },
+    "Ariake_margin": {
+      "gis_longitude": 130.3,
+      "gis_latitude": 32.87,
+      "reference_dem10b_z12_m": 8.06,
+      "sample_dem10b_z9_m": 10.77,
+      "z9_minus_reference_m": 2.71,
+      "status": "COMPARE_ONLY"
+    },
+    "Oze": {
+      "gis_longitude": 139.25,
+      "gis_latitude": 36.93,
+      "reference_dem10b_z12_m": 1440.97,
+      "sample_dem10b_z9_m": 1485.31,
+      "z9_minus_reference_m": 44.34,
+      "status": "COMPARE_ONLY"
+    }
+  },
+  "elevation_resolution_checkpoints_acceptance": false,
+  "sample_min_elevation_m": 0.0,
+  "sample_max_elevation_m": 3532.89,
+  "not_rimworld_runtime_test": true,
+  "not_approved_climate_or_ecology": true,
+  "not_watercourse_or_wetland_data": true,
+  "wetlands_inferred": false,
+  "not_historic_dem": true
+}

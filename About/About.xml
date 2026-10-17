@@ -44,9 +44,7 @@ Adds an optional, fixed Worldbuilder map representing the Japanese archipelago, 
 
 The current prototype includes Honshu, Shikoku, Kyushu and selected nearby islands. Hokkaido and the Ryukyu Islands are outside its current scope. The main island outlines have been reviewed in-game; historic geographic accuracy is still being developed.
 
-Bundled map and DLL are the original author-playtested 1.6 shape prototype, not a rebuild of subsequent source fixes.
-
-Known issues being corrected: faction settlements on ocean tiles; underrepresented subalpine and alpine zones; insufficient settleable high-mountain tiles. The intended result preserves settleable ordinary highlands while making the summit tiles of Mount Fuji, Tateyama and Hakusan impassable alpine terrain. These fixes have not yet passed final gameplay acceptance.
+Bundled Worldbuilder map and DLL are the revised RimWorld 1.6 native-tested build from source d3783c6779525d75e1f750bc3e874492190fca1e (Project Actions #39042174500). Tests verified no non-player faction settlement on sea/impassable ground, settlement-capable subalpine and alpine terrain, impassable alpine summit tiles for Mt Fuji, Tateyama and Hakusan, new game, save and reload, with zero Unity errors. Subalpine increased from 1,268 to 4,562 tiles and Alpine from 33 to 55 tiles. Alpine terrain is still geographically scarce; final author visual acceptance of highland distribution is pending.
 
 Requires Harmony, Vanilla Expanded Framework, Worldbuilder and AMJ Environment. Choose "AMJ Japan World (Prototype)" through Worldbuilder when starting a new world. This is an optional add-on; it does not change AMJ Environment's ordinary procedural world generation.
 
@@ -60,9 +58,7 @@ Worldbuilderを利用し、日本列島を再現する固定ワールドマッ�
 
 本州・四国・九州と周辺の一部の島々を含む。北海道・琉球諸島は現時点で対象外。列島の大まかな形状は実ゲームで確認済みだが、地形や生態分布の再現は開発途中。
 
-同梱した地図データとDLLは、形状確認済みの旧1.6試作版。後からソースで修正した内容は、まだ新たにビルド・反映されていない。
-
-現在修正中の問題：海上の派閥拠点、亜高山・高山帯の不足、山岳の入植可能地の不足。一般の高山には入植可能地を残し、富士山・立山・白山の山頂タイルは入植不可の高山にする。これらの修正は実ゲームでの最終確認が未完了。
+同梱した地図データとDLLは、修正済みソース d3783c6779525d75e1f750bc3e874492190fca1e から生成し、Project Actions #39042174500 でRimWorld 1.6実ゲーム検証に合格したもの。海上・入植不能な非プレイヤー派閥拠点0件、亜高山・高山それぞれの入植可能タイル、富士山・立山・白山の入植不可山頂3セル、入植・セーブ・ロード、Unity ERROR 0を確認した。亜高山は1,268→4,562タイル、高山は33→55タイル。高山帯は依然として少なく、分布の作者目視承認は未了。
 
 Harmony、Vanilla Expanded Framework、Worldbuilder、AMJ Environmentが必須。新規ワールド作成時にWorldbuilderから「AMJ Japan World (Prototype)」を選択する。独立した追加Modであり、AMJ Environmentの通常のランダムワールド生成は変更しない。
 

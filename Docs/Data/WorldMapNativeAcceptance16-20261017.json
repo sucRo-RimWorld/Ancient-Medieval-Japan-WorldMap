@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "version": "1.6",
+  "scenario": "AMJJapanPlayableAcceptance",
+  "new_game": {
+    "result": "PASS",
+    "exit_code": 0,
+    "unity_errors": 0,
+    "tile_id": 6
+  },
+  "save_reload": {
+    "result": "PASS",
+    "exit_code": 0,
+    "unity_errors": 0,
+    "tile_id": 6
+  },
+  "preset_mod": "sucro.amj.japanworld",
+  "mod_files": [
+    "About/About.xml",
+    "Worldbuilder/AMJ_Japan_World_Prototype/Preset.xml",
+    "Worldbuilder/AMJ_Japan_World_Prototype/TerrainData.xml"
+  ]
+}

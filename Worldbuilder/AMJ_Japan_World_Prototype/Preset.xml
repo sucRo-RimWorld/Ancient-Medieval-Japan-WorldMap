@@ -13,9 +13,9 @@
 	</biomes>
 	<landmarks IsNull="True" />
 	<features>
-		<li>River</li>
 		<li>Mountain</li>
 		<li>Coast</li>
+		<li>River</li>
 	</features>
 	<description>Japan-only modern coastline, JMA-station-interpolated rainfall and DEM-based terrain/river routing. Geographic wetlands and medieval climate remain provisional.</description>
 	<saveTerrain>True</saveTerrain>
