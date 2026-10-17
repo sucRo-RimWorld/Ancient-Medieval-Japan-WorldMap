@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a bounded GSI DEMGM-derived research terrain table from an audited Japan land mask.
+"""Build a bounded GSI DEM10B-derived research terrain table from an audited Japan land mask.
 
 Does not publish or copy raw GSI tiles into Mod. Not a historical climate model;
 no wetlands, rainfall, rivers, coasts or executable Worldbuilder preset inferred.
@@ -17,10 +17,10 @@ from urllib.request import Request, urlopen
 
 from PIL import Image
 
-Z = 8
-CAP = 120
+Z = 9
+CAP = 480
 MAX_BYTES = 512000
-GSI = 'https://cyberjapandata.gsi.go.jp/xyz/demgm_png/{z}/{x}/{y}.png'
+GSI = 'https://cyberjapandata.gsi.go.jp/xyz/dem_png/{z}/{x}/{y}.png'
 MASK_COLS = ('tile_id','globe_longitude','globe_latitude','gis_longitude','gis_latitude','is_land','island')
 BIOME_WARM='AMJ_WarmTemperateForest'
 BIOME_COOL='AMJ_CoolTemperateForest'
@@ -150,7 +150,7 @@ def annual_rainfall_research(lon, lat):
 
 
 def nearby_dem_estimate(image, px, py, max_pixel_radius=2):
-    """Nearest valid *other* GSI DEMGM pixel, bounded to 2 pixels (~1 km).
+    """Nearest valid *other* GSI DEM10B pixel, bounded to 2 pixels (~0.5 km).
 
     An estimated elevation, never an observed sample at the target coordinate.
     Negative pixels and unavailable DEM remain unresolved if no valid neighbor.
@@ -214,7 +214,7 @@ def tile_images(needed, cache, allow_network, max_fetch, minimum_interval=0.35):
     import hashlib
     last_fetch=None
     for x,y in sorted(needed):
-        cached=Path(cache)/f'demgm_png_{Z}_{x}_{y}.png' if cache else None
+        cached=Path(cache)/f'dem10b_png_{Z}_{x}_{y}.png' if cache else None
         blob=cached.read_bytes() if cached and cached.is_file() else None
         if blob is None and allow_network:
             if last_fetch is not None:
@@ -239,7 +239,7 @@ def tile_images(needed, cache, allow_network, max_fetch, minimum_interval=0.35):
     return found,hashes,missing,downloads
 
 # Independent, exact-point higher-resolution GSI DEM10B z12 observations.
-# z8 comparison is diagnostic only: different resolution and source products.
+# z9 DEM10B comparison is diagnostic only: different zoom/resolution (not a benchmark target).
 ELEVATION_REFERENCE_POINTS = (
     ('Kyushu_lowland', 130.56, 31.60, 4.67),
     ('Northern_Honshu', 140.00, 39.00, 233.39),
@@ -250,23 +250,23 @@ ELEVATION_REFERENCE_POINTS = (
 )
 
 def reference_resolution_qa(images):
-    """Point-vs-point z8/z12 diagnostic; never use as a biome acceptance."""
+    """Point-vs-point z9/z12 diagnostic; never use as a biome acceptance."""
     results = {}
     for name,lon,lat,reference in ELEVATION_REFERENCE_POINTS:
         x,y,px,py=tile_position(lon,lat)
         image=images.get((x,y))
         value=decode_height(image.getpixel((px,py))) if image else None
         if value is None:
-            status='MISSING_Z8'
+            status='MISSING_Z9'
         elif value<0:
-            status='NEGATIVE_Z8'
+            status='NEGATIVE_Z9'
         else:
             status='COMPARE_ONLY'
         results[name]={
             'gis_longitude':lon,'gis_latitude':lat,
             'reference_dem10b_z12_m':reference,
-            'sample_demgm_z8_m':value if status=='COMPARE_ONLY' else None,
-            'z8_minus_reference_m':round(value-reference,2) if status=='COMPARE_ONLY' else None,
+            'sample_dem10b_z9_m':value if status=='COMPARE_ONLY' else None,
+            'z9_minus_reference_m':round(value-reference,2) if status=='COMPARE_ONLY' else None,
             'status':status,
         }
     return results
@@ -295,7 +295,7 @@ def build(mask, output, report, *, cache=None,fetch=False,max_tiles=CAP):
             rainfall=annual_rainfall_research(lon,lat)
             rainfall_values.append(rainfall)
             h=sampled
-            source='demgm_png_z8'
+            source='dem10b_png_z9'
             quality='RESEARCH_ONLY'
             if original_gap:
                 reason=('SOURCE_'+missing_sources[(x,y)].upper() if image is None else
@@ -310,7 +310,7 @@ def build(mask, output, report, *, cache=None,fetch=False,max_tiles=CAP):
                 estimate=nearby_dem_estimate(image,px,py)
                 if estimate is not None:
                     h,radius=estimate
-                    source=f'demgm_png_z8_nearby_{radius}px'
+                    source=f'dem10b_png_z9_nearby_{radius}px'
                     quality='LOCAL_DEM_ESTIMATE'
                     model_estimated+=1
                 else:
@@ -349,7 +349,7 @@ def build(mask, output, report, *, cache=None,fetch=False,max_tiles=CAP):
     assert sum(r['missing_elevation_count']+r['negative_gsi_land_conflict_count']
                for r in island_qa.values())==no_data
     qa={**summary,'island_dem_coverage':island_qa,'status':'COMPLETE_RESEARCH' if no_data==0 else 'PARTIAL_RESEARCH',
-        'source':'GSI demgm_png z8 / Global Map DEM 2nd edition; modern data',
+        'source':'GSI dem_png DEM10B z9 / Fundamental Geospatial Data-derived elevations; modern data',
         'original_pngs_redistributed':False,'hist_wetland_inferred':False,
         'climate_model':'JMA 1991-2020 twelve-station monthly mean temperature, nearest-four IDW, altitude lapse .00625C/m; no historical correction',
         'temperature_monthly_observations_are_per_tile':False,
