@@ -237,7 +237,10 @@ def main(root,output,gis,acceptance=False):
         shutil.copy2(scratch/"regional-qa.json",output/"regional-qa.json")
         shutil.copy2(scratch/"landmask-qa.json",output/"landmask-qa.json")
         (output/"About").mkdir()
-        shutil.copy2(Path(__file__).resolve().parent/"AMJ-Japan-World"/"About"/"About.xml",output/"About"/"About.xml")
+        # Package exactly the owner's canonical Mod metadata, not a stale
+        # nested historical producer template.
+        shutil.copy2(Path(__file__).resolve().parents[2]/"About"/"About.xml",
+                     output/"About"/"About.xml")
         (output/"Assemblies").mkdir()
         shutil.copy2(runtime_binary,output/"Assemblies"/runtime_binary.name)
         if acceptance:
