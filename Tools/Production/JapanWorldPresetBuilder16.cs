@@ -20,6 +20,38 @@ namespace AncientMedievalJapan.WorldMap
     public sealed class AMJJapanWorldPresetBuilder : AbstractQuickstart
     {
         private const string PresetName = "AMJ_Japan_World_Prototype";
+        // Sacred *summit tile* protection, not blanket exclusion of the
+        // surrounding inhabited mountain ranges and pilgrimage foothills.
+        // These are the three traditionally named Japanese sacred mountains.
+        // Coordinates locate the closest actual Japanese grid cell; they are
+        // NOT substitute DEM measurements or invented historical climate data.
+        private struct SacredSummit
+        {
+            public string Name;
+            public double Longitude;
+            public double Latitude;
+            public SacredSummit(string name, double longitude, double latitude)
+            {
+                Name = name;
+                Longitude = longitude;
+                Latitude = latitude;
+            }
+        }
+
+        private static readonly SacredSummit[] SacredSummits = {
+            new SacredSummit("Fuji", 138.7272, 35.3606),
+            new SacredSummit("Tateyama (Oyama)", 137.6190, 36.5750),
+            new SacredSummit("Hakusan (Gozengamine)", 136.7715, 36.1550)
+        };
+
+        private static double SummitDistanceSquared(SacredSummit summit,
+            double longitude, double latitude)
+        {
+            double dx = (longitude - summit.Longitude) *
+                Math.Cos(summit.Latitude * Math.PI / 180.0);
+            double dy = latitude - summit.Latitude;
+            return dx * dx + dy * dy;
+        }
         private static readonly CultureInfo Inv = CultureInfo.InvariantCulture;
 
         public override TaggedString description { get { return "Produce selectable Japan-shape + biome Worldbuilder preset."; } }
@@ -161,6 +193,13 @@ namespace AncientMedievalJapan.WorldMap
             var islands = new HashSet<string>(StringComparer.Ordinal);
             var kyushuStartCandidates = new List<PlanetTile>();
             var isJapanLand = new bool[tileCount];
+            var sacredPeakTileIds = new int[SacredSummits.Length];
+            var sacredPeakDistances = new double[SacredSummits.Length];
+            for (int s = 0; s < SacredSummits.Length; s++)
+            {
+                sacredPeakTileIds[s] = -1;
+                sacredPeakDistances[s] = Double.MaxValue;
+            }
 
             using (var reader = new StreamReader(mask))
             {
@@ -189,6 +228,26 @@ namespace AncientMedievalJapan.WorldMap
                         if (!data.TryGetValue(expectedId, out r) ||
                             String.IsNullOrEmpty(r.Biome) || !r.Temperature.HasValue)
                             throw new InvalidDataException("Regional climate/biome missing land tile: " + expectedId);
+                        // Select a single closest grid cell for each sacred peak
+                        // using the original GIS coordinates, not the virtual
+                        // planet longitude or the low-resolution DEM maximum.
+                        double gisLongitude, gisLatitude;
+                        if (!Double.TryParse(cells[3], NumberStyles.Float, Inv,
+                                out gisLongitude) ||
+                            !Double.TryParse(cells[4], NumberStyles.Float, Inv,
+                                out gisLatitude))
+                            throw new InvalidDataException(
+                                "Invalid GIS coordinate for Japan land tile " + expectedId);
+                        for (int s = 0; s < SacredSummits.Length; s++)
+                        {
+                            double distance = SummitDistanceSquared(
+                                SacredSummits[s], gisLongitude, gisLatitude);
+                            if (distance < sacredPeakDistances[s])
+                            {
+                                sacredPeakDistances[s] = distance;
+                                sacredPeakTileIds[s] = expectedId;
+                            }
+                        }
                         // Missing DEM retains original negative/nodata QA; only the
                         // gameplay elevation uses 1m. Both biome and temperature
                         // are produced together from JMA-monthly/Kira-WI/CI model.
@@ -203,8 +262,10 @@ namespace AncientMedievalJapan.WorldMap
                         tile.elevation = Math.Max(1f, height);
                         tile.temperature = temp;
                         tile.rainfall = r.Rainfall.Value;
-                        tile.hilliness = height > 2400 ? Hilliness.Impassable :
-                                         height > 1500 ? Hilliness.Mountainous :
+                        // A high-alpine BiomeDef is NOT inherently an
+                        // impassable hilliness classification. Only specific
+                        // sacred summit cells are made impassable below.
+                        tile.hilliness = height > 1500 ? Hilliness.Mountainous :
                                          height > 650 ? Hilliness.LargeHills :
                                          height > 200 ? Hilliness.SmallHills : Hilliness.Flat;
                         if (cells[6] == "Kyushu" && tile.hilliness != Hilliness.Impassable)
@@ -227,6 +288,33 @@ namespace AncientMedievalJapan.WorldMap
             if (expectedId != tileCount || islands.Count != 13 || landCount == 0 ||
                 landCount + oceanCount != tileCount || data.Count != landCount)
                 throw new InvalidDataException("Japan coastline and regional source coverage mismatch.");
+
+            // Summit protection is **per tile**. Other alpine/high mountain
+            // cells retain Mountainous or lower hilliness and can support
+            // settlement, subject to the original game's settlement rules.
+            // Never manufacture 3776m/3015m/2702m raster elevations here:
+            // the real z8 under-sampling is a separate source-data issue.
+            var alpineZone = DefDatabase<BiomeDef>.GetNamed("AMJ_AlpineZone");
+            var protectedPeakCells = new HashSet<int>();
+            for (int s = 0; s < SacredSummits.Length; s++)
+            {
+                int id = sacredPeakTileIds[s];
+                // <= ~20 km in geographic distance; beyond this the
+                // original grid/GIS alignment is too weak to claim a summit.
+                if (id < 0 || sacredPeakDistances[s] > 0.18d * 0.18d ||
+                    !isJapanLand[id] || !protectedPeakCells.Add(id))
+                    throw new InvalidDataException(
+                        "Japan grid cannot resolve independent sacred summit " +
+                        SacredSummits[s].Name);
+                var summitTile = grid[id] as SurfaceTile;
+                if (summitTile == null)
+                    throw new InvalidDataException(
+                        "Sacred summit is not a surface tile: " + id);
+                summitTile.PrimaryBiome = alpineZone;
+                summitTile.hilliness = Hilliness.Impassable;
+                Log.Message("[AMJ Japan World Export] protected uninhabitable " +
+                    SacredSummits[s].Name + " alpine summit at tile " + id);
+            }
 
             // The seed world has arbitrary rivers and roads unrelated to Japan.
             // Erase its networks and flow distance before calculating rivers from
