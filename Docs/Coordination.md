@@ -1,0 +1,12 @@
+# AMJ WorldMap Coordination (main only)
+
+This file records status and owner handoffs; design and current source are authoritative in `Docs/Design.md` and `Tools/`.
+
+## WORLDMAP-OWNER-MIGRATION-20261017
+
+**Owner:** `sucRo-RimWorld/Ancient-Medieval-Japan-WorldMap`.
+**Status:** migration of already-approved 1.6 prototype **source only**, **FEATURE DEVELOPMENT PAUSED** pending Environment forest vegetation decisions. Do not run the existing native producer or tests as part of the repository split. Original Project source/run history remains accessible and should be referenced by exact commits; eventual cleanup of now-legacy Project copies must not break other Project host workflows.
+
+**Completed before migration:** author-approved manually triggered Project [Actions #39022443969](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/39022443969) from Project source `b0f43fdc9f7f419c289b57fe75b654b174e18a91`. The one-shot native RimWorld Linux 1.6 producer generated a selectable Worldbuilder XML pair and scoped restore DLL. Separate new-colony and saved-game reload: PASS / exit 0 / Unity ERROR 0. Original output [artifact #12097720526](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/39022443969/artifacts/12097720526), ZIP SHA256 `cc93538edd549ed97c3564014013ff4ea0702202e6d70076c641c1061c57cdd2`. Not evidence of 1.7, complete Japan vegetation, physical seasons or release acceptance.
+
+**Immediate cross-owner contract:** Project coordinates its original native host and issue #39, while WorldMap owns map generation source and formal design. Environment's 0.2.0 wetlands then forest/intermediate-band decisions precede new WorldMap biome tuning. No new repo hosted self-runner assumed. The fixed map remains an optional separate Mod; Environment's random world generation stays independent.
