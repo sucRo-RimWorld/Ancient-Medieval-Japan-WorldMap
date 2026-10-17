@@ -39,7 +39,7 @@ class Tests(unittest.TestCase):
         self.assertIsNone(m.decode_height((128,0,0)))
 
     def test_geolocation_and_band_edges(self):
-        self.assertEqual(m.tile_position(135.5,36)[0:2],(224,100))
+        self.assertEqual(m.tile_position(135.5,36)[0:2],(448,201))
         for wi,ci,expected in ((85,-10,m.BIOME_WARM),
                                (85,-10.001,m.BIOME_COOL),
                                (84.999,0,m.BIOME_COOL),
@@ -182,6 +182,6 @@ class Tests(unittest.TestCase):
             p.write_text(p.read_text().replace('1,0,0,','11,0,0,',1))
             with self.assertRaises(ValueError):m.load_land(p)
             with self.assertRaises(ValueError):
-                m.tile_images({(i,100) for i in range(121)},None,False,120)
+                m.tile_images({(i,100) for i in range(481)},None,False,480)
 
 if __name__=='__main__':unittest.main(verbosity=2)
