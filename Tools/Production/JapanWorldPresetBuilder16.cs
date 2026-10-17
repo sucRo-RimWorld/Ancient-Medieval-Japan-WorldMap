@@ -120,15 +120,15 @@ namespace AncientMedievalJapan.WorldMap
                         Single.IsNaN(rainfall) || Single.IsInfinity(rainfall) ||
                         rainfall < 0f || rainfall > 6000f)
                         throw new InvalidDataException("Invalid JMA-calibrated rainfall at tile " + id);
+                    if (!Single.TryParse(cells[5], NumberStyles.Float, Inv, out temperature) ||
+                        Single.IsNaN(temperature) || Single.IsInfinity(temperature))
+                        throw new InvalidDataException("Invalid modeled annual temperature at tile " + id);
                     if (!Single.TryParse(cells[10], NumberStyles.Float, Inv, out wi) ||
                         Single.IsNaN(wi) || Single.IsInfinity(wi) || wi < 0f || wi > 240f ||
                         !Single.TryParse(cells[11], NumberStyles.Float, Inv, out ci) ||
                         Single.IsNaN(ci) || Single.IsInfinity(ci) || ci > 0f || ci < -240f ||
-                        cells[6] != BiomeForClimate(wi, ci))
+                        cells[6] != BiomeForClimate(wi, ci, temperature))
                         throw new InvalidDataException("Japan thermal-index biome mismatch at tile " + id);
-                    if (!Single.TryParse(cells[5], NumberStyles.Float, Inv, out temperature) ||
-                        Single.IsNaN(temperature) || Single.IsInfinity(temperature))
-                        throw new InvalidDataException("Invalid modeled annual temperature at tile " + id);
                     records.Add(id, new Region {
                         Elevation = Single.TryParse(cells[4], NumberStyles.Float, Inv, out height) && height >= 0
                             ? (float?)height : null,
@@ -141,12 +141,16 @@ namespace AncientMedievalJapan.WorldMap
             return records;
         }
 
-        private static string BiomeForClimate(float warmthIndex, float coldnessIndex)
+        private static string BiomeForClimate(float warmthIndex, float coldnessIndex,
+                                              float annualMeanC)
         {
-            if (warmthIndex >= 85f && coldnessIndex >= -10f) return "AMJ_WarmTemperateForest";
-            if (warmthIndex >= 45f) return "AMJ_CoolTemperateForest";
-            if (warmthIndex >= 15f) return "AMJ_SubalpineForest";
-            return "AMJ_AlpineZone";
+            // AMJ Environment formal annual-temperature mountain bands.
+            // These match the Python producer's serialized 0.001C values.
+            if (annualMeanC < 0f) return "AMJ_AlpineZone";
+            if (annualMeanC < 8f) return "AMJ_SubalpineForest";
+            if (warmthIndex >= 85f && coldnessIndex >= -10f)
+                return "AMJ_WarmTemperateForest";
+            return "AMJ_CoolTemperateForest";
         }
 
         public override void PostApplyConfiguration()
