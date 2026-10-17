@@ -40,22 +40,26 @@ class Tests(unittest.TestCase):
 
     def test_geolocation_and_band_edges(self):
         self.assertEqual(m.tile_position(135.5,36)[0:2],(448,201))
-        for wi,ci,expected in ((85,-10,m.BIOME_WARM),
-                               (85,-10.001,m.BIOME_COOL),
-                               (84.999,0,m.BIOME_COOL),
-                               (45,-30,m.BIOME_COOL),
-                               (44.999,0,m.BIOME_SUB),
-                               (15,-100,m.BIOME_SUB),
-                               (14.999,0,m.BIOME_ALPINE)):
-            self.assertEqual(m.band(wi,ci),expected)
+        # Highland boundaries use the existing AMJ Environment mean
+        # temperature spec; original lowland WI/CI gate is retained.
+        for wi,ci,annual,expected in (
+                (85,-10,15,m.BIOME_WARM),
+                (85,-10.001,15,m.BIOME_COOL),
+                (84.999,0,15,m.BIOME_COOL),
+                (45,-30,8,m.BIOME_COOL),
+                (44.999,0,8,m.BIOME_COOL),
+                (100,0,7.999,m.BIOME_SUB),
+                (15,-100,0,m.BIOME_SUB),
+                (100,0,-0.001,m.BIOME_ALPINE)):
+            self.assertEqual(m.band(wi,ci,annual),expected)
         # These exactly match the JMA 1991-2020 station normals.
         self.assertAlmostEqual(m.climate_research(140.737,40.822,0)[1],85.7)
         self.assertAlmostEqual(m.climate_research(141.154,39.703,0)[1],86.0)
         # Northern Honshu's cool-forest winter condition is not captured by
         # warmth index alone.
-        _,north_wi,north_ci=m.climate_research(140.737,40.822,0)
+        north_annual,north_wi,north_ci=m.climate_research(140.737,40.822,0)
         self.assertAlmostEqual(north_ci,-17.1)
-        self.assertEqual(m.band(north_wi,north_ci),m.BIOME_COOL)
+        self.assertEqual(m.band(north_wi,north_ci,north_annual),m.BIOME_COOL)
         annual,wi,ci=m.climate_research(140.872,38.268,0)
         self.assertAlmostEqual(annual,12.825,places=3)
         self.assertAlmostEqual(wi,100.0)
@@ -66,8 +70,8 @@ class Tests(unittest.TestCase):
         high=m.climate_research(135.5,36,1000)
         self.assertAlmostEqual(base[0]-high[0],6.25)
         self.assertLess(high[1],base[1])
-        self.assertEqual(m.band(*m.climate_research(140.872,38.268,0)[1:]),
-                         m.BIOME_WARM)
+        sendai=m.climate_research(140.872,38.268,0)
+        self.assertEqual(m.band(sendai[1],sendai[2],sendai[0]),m.BIOME_WARM)
         with self.assertRaises(ValueError):
             m.climate_research(140.872,38.268,float('nan'))
         with self.assertRaises(ValueError):m.tile_position(float('nan'),35)
@@ -109,7 +113,8 @@ class Tests(unittest.TestCase):
             self.assertTrue(all(1000 < float(x['annual_rainfall_mm']) < 3000 for x in rows))
             self.assertTrue(all(float(x['warmth_index']) >= 0 for x in rows))
             self.assertTrue(all(float(x['coldness_index']) <= 0 for x in rows))
-            self.assertEqual(r['biome_warmth_index_c_month'],[85.,45.,15.])
+            self.assertEqual(r['biome_warmth_index_c_month'],[85.])
+            self.assertEqual(r['highland_annual_mean_c_thresholds'],[0.,8.])
             self.assertEqual(r['warm_temperate_coldness_index_min_c_month'],-10.0)
             self.assertFalse(r['temperature_monthly_observations_are_per_tile'])
             self.assertFalse(r['rainfall_observations_are_per_tile'])
