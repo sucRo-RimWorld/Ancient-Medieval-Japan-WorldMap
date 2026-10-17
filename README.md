@@ -1,0 +1,2 @@
+# Ancient-Medieval-Japan-WorldMap
+Worldbuilderを利用して中世日本ワールドマップを作成する。Enviromentも前提Mod
