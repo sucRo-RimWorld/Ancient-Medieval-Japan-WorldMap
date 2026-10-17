@@ -91,7 +91,7 @@ namespace AncientMedievalJapan.WorldMap
                 if (sub) subalpineFree++;
                 if (high) alpineFree++;
             }
-            foreach (var site in Find.World.worldObjects.worldObjects.OfType<Settlement>())
+            foreach (var site in Utils.GetSurfaceWorldObjects<Settlement>())
             {
                 if (site.Faction == null || site.Faction.IsPlayer) continue;
                 factionSites++;

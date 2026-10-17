@@ -97,14 +97,19 @@ def climate_research(lon, lat, elevation_m):
     coldness_index=sum(min(t-5.0,0.0) for t in months)
     return annual_mean,warmth_index,coldness_index
 
-def band(warmth_index,coldness_index):
-    # Coldness-index eligibility is required for evergreen broad-leaved warm
-    # forests. JMA vegetation review suggests CI about -10..-15 degree-month;
-    # choose the conservative -10 provisional boundary, NOT a target quota.
+def band(warmth_index,coldness_index,annual_mean_c):
+    """Honor Environment's canonical *annual-temperature* alpine boundaries.
+
+    The old Kira-WI <15 / 15..45 decision narrowed Japanese mountain
+    bands far below the stand-alone AMJ Environment's already accepted
+    0C alpine / 0..8C subalpine division. Preserve the pre-existing warm
+    evergreen eligibility (WI + CI) for lowlands; mountain cutoffs use
+    Environment's own ecology contract, not an arbitrary tile quota.
+    """
+    if annual_mean_c < 0.0:return BIOME_ALPINE
+    if annual_mean_c < 8.0:return BIOME_SUB
     if warmth_index >= 85.0 and coldness_index >= -10.0:return BIOME_WARM
-    if warmth_index >= 45.0:return BIOME_COOL
-    if warmth_index >= 15.0:return BIOME_SUB
-    return BIOME_ALPINE
+    return BIOME_COOL
 
 # JMA station annual rainfall normals, 1991-2020 (mm), NOT medieval climate.
 # Approximate observatory coordinates are used solely as interpolation anchors.
@@ -329,10 +334,10 @@ def build(mask, output, report, *, cache=None,fetch=False,max_tiles=CAP):
             # No elevation observation: retain unknown provenance and the
             # existing 1m gameplay fallback. Do not silently treat it as DEM.
             t,wi,ci=climate_research(lon,lat,h if h is not None else 1.0)
-            # Classify the SAME 0.001-degree-month indices that native
-            # single-precision Worldbuilder producer validates/consumes.
-            wi,ci=round(wi,3),round(ci,3)
-            biome=band(wi,ci)
+            # Match the native C# reader's serialized 0.001-unit
+            # annual-temperature and index values at exact band edges.
+            t,wi,ci=round(t,3),round(wi,3),round(ci,3)
+            biome=band(wi,ci,t)
             warmth_values.append(wi)
             coldness_values.append(ci)
             stats[biome]+=1
@@ -356,8 +361,9 @@ def build(mask, output, report, *, cache=None,fetch=False,max_tiles=CAP):
         'temperature_source':'https://www.data.jma.go.jp/stats/en/normal/normal.html',
         'temperature_northern_honshu_source':'https://www.data.jma.go.jp/stats/etrn/view/nml_sfc_ym.php',
         'jma_station_monthly_temperature_c':{name:list(months) for name,lon,lat,months in JMA_TEMP_STATIONS},
-        'biome_model':'Kira warmth index sum(max(T-5C,0)); CI=sum(min(T-5C,0)); warm forest also requires CI>=-10 (provisional)',
-        'biome_warmth_index_c_month':[85.,45.,15.],
+        'biome_model':'Environment canonical annual mean: alpine T<0C, subalpine 0<=T<8C; above 8C the existing Kira WI>=85 and CI>=-10 gate retains warm evergreen eligibility, else cool; neither quota nor historical observations',
+        'biome_warmth_index_c_month':[85.],
+        'highland_annual_mean_c_thresholds':[0.0,8.0],
         'warm_temperate_coldness_index_min_c_month':-10.0,
         'modeled_warmth_index_range_c_month':[round(min(warmth_values),3),round(max(warmth_values),3)],
         'modeled_coldness_index_range_c_month':[round(min(coldness_values),3),round(max(coldness_values),3)],
