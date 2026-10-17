@@ -2,6 +2,10 @@
 
 This file records current owner status and handoffs. Confirmed design, statistics, provenance and implementation are owned by `Docs/Design.md`, `Docs/DataProvenance.md`, `Docs/Data/` and `Tools/`.
 
+## WORLDMAP-INTERMEDIATE-FOREST-OWNERSHIP-20261018 — accepted design, implementation open
+
+**Owner:** WorldMap for the Japan fixed-world-only intermediate-temperate forest BiomeDef, its local vegetation weights and regional north/south subdivisions; Environment remains owner of ordinary four biomes, natural-world generation and common PlantDefs. **Status:** OWNERSHIP DECIDED / BIOME XML AND REGION RULES NOT YET IMPLEMENTED. Re-evaluate Subalpine/Alpine distribution only after the WorldMap intermediate-temperate forest is implemented; avoid implementing proposed 10°C/2°C trial thresholds. Separately progress the already reported excessive settlement density and relief-based hilliness design. Canonical accepted responsibility/sequence: `Docs/Design.md`. No RimWorld run, DLL/XML replacement, or release acceptance by this decision.
+
 ## WORLDMAP-REVISED-16-NATIVE-PASS-20261017 — mountain visual acceptance open
 
 **Owner:** WorldMap. **State: ACTIVE / REVISED PACKAGE SOURCE AND RUNTIME PASS / AUTHOR HIGHLAND VISUAL ACCEPTANCE OPEN / NO WORKSHOP.**
