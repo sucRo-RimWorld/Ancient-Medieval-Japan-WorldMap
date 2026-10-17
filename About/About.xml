@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Ancient &amp; Medieval Japan - WorldMap（中世日本 - 世界地図）</name>
+  <author>sucRo0629</author>
+  <packageId>sucro.amj.japanworld</packageId>
+  <url>https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-WorldMap</url>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modVersion>0.1.0-dev</modVersion>
+
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>OskarPotocki.VanillaFactionsExpanded.Core</packageId>
+      <displayName>Vanilla Expanded Framework</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2023507013</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>ferny.worldbuilder</packageId>
+      <displayName>Worldbuilder</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3522102833</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>sucro.ancientmedievaljapan.environment</packageId>
+      <displayName>Ancient &amp; Medieval Japan - Environment</displayName>
+    </li>
+  </modDependencies>
+
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>ferny.worldbuilder</li>
+    <li>sucro.ancientmedievaljapan.environment</li>
+  </loadAfter>
+
+  <description>Development prototype for RimWorld 1.6. Not yet ready for public release.
+
+Adds an optional, fixed Worldbuilder map representing the Japanese archipelago, with Japan-oriented AMJ Environment biomes and provisional terrain, mountain and climate data.
+
+The current prototype includes Honshu, Shikoku, Kyushu and selected nearby islands. Hokkaido and the Ryukyu Islands are outside its current scope. The main island outlines have been reviewed in-game; historic geographic accuracy is still being developed.
+
+Known issues being corrected: faction settlements on ocean tiles; underrepresented subalpine and alpine zones; insufficient settleable high-mountain tiles. The intended result preserves settleable ordinary highlands while making the summit tiles of Mount Fuji, Tateyama and Hakusan impassable alpine terrain. These fixes have not yet passed final gameplay acceptance.
+
+Requires Harmony, Vanilla Expanded Framework, Worldbuilder and AMJ Environment. Choose "AMJ Japan World (Prototype)" through Worldbuilder when starting a new world. This is an optional add-on; it does not change AMJ Environment's ordinary procedural world generation.
+
+Save compatibility: Start a new game. Adding to an existing world is not supported. Do not remove this mod from saves created with its custom world preset.
+
+RimWorld 1.6 only. RimWorld 1.7 compatibility has not been confirmed.
+
+RimWorld 1.6向け開発試作版。一般公開に必要な確認は未完了。
+
+Worldbuilderを利用し、日本列島を再現する固定ワールドマップを追加する。AMJ Environmentのバイオームを使用し、標高・山地・気候を日本向けに仮設定する。
+
+本州・四国・九州と周辺の一部の島々を含む。北海道・琉球諸島は現時点で対象外。列島の大まかな形状は実ゲームで確認済みだが、地形や生態分布の再現は開発途中。
+
+現在修正中の問題：海上の派閥拠点、亜高山・高山帯の不足、山岳の入植可能地の不足。一般の高山には入植可能地を残し、富士山・立山・白山の山頂タイルは入植不可の高山にする。これらの修正は実ゲームでの最終確認が未完了。
+
+Harmony、Vanilla Expanded Framework、Worldbuilder、AMJ Environmentが必須。新規ワールド作成時にWorldbuilderから「AMJ Japan World (Prototype)」を選択する。独立した追加Modであり、AMJ Environmentの通常のランダムワールド生成は変更しない。
+
+セーブ互換性：新規ゲーム専用。既存ワールドへの途中導入は非対応。本Modの固定ワールドを使用したセーブから本Modを削除しないこと。
+
+対応確認済みなのはRimWorld 1.6のみ。1.7の動作は未確認。</description>
+</ModMetaData>
