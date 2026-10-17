@@ -219,7 +219,7 @@ def main(root,output,gis,acceptance=False):
         terrain=checked([gis,str(RESEARCH/"BuildJapanRegionalTerrain.py"),
                          "--land-mask",str(mask),"--output",str(regional),
                          "--report",str(scratch/"regional-qa.json"),
-                         "--fetch","--max-tiles","120"],timeout=510,allow_partial=True)
+                         "--fetch","--max-tiles","480"],timeout=510,allow_partial=True)
         if not regional.is_file():
             raise RuntimeError("Regional terrain missing: "+terrain.stderr[-800:])
         presetdir=scratch/"export"
