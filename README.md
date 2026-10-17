@@ -1,27 +1,36 @@
 # Ancient & Medieval Japan - WorldMap（中世日本 - 世界地図）
 
-**開発中／RimWorld 1.6試作版。** 日本列島の形状は作者が実ゲームで確認済み。現在は海上の派閥拠点、亜高山・高山の不足、山地の入植可能性、霊山の山頂制限を修正・検証中。**これらを解決するまでWorldMapの開発を保留しない。**
+**RimWorld 1.6用の開発試作版。日本列島の形状は作者の実ゲーム確認で合格。** 4件の問題（海上派閥拠点、亜高山・高山の少なさ、通常山岳の入植可能性、富士山・立山・白山の山頂制限）は修正・実ゲーム受入が完了するまで開発を継続する。
 
-## 重要：git cloneしただけではワールドを選択できない
+## GitHubからの導入（1.6）
 
-このリポジトリは**ソース管理用**。 `About/About.xml` はこのリポジトリ直下にあるが、Worldbuilderが表示するための**生成済みプリセット2ファイルと実行時DLLはリポジトリに含まれていない**。そのため、現行の `main` をRimWorldのModsフォルダにgit cloneしても、ワールド生成画面には **AMJ Japan World (Prototype)** が表示されない。これは現在の配布方法の未完成部分であり、読み込み順序の問題ではない。
+このリポジトリは **git clone後に必要なModデータが揃う配置**となっている。生成用ソースだけでなく、**以前の1.6実ゲーム確認済みプリセットと実行DLL**を同梱している。
 
-**既存の実ゲーム確認済み1.6形状をすぐ試す場合：**
+1. `RimWorld/Mods/` で `git clone https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-WorldMap.git` を実行する。既存のcloneがある場合は `git pull` で更新する。
+2. RimWorld **1.6** で **Harmony、Vanilla Expanded Framework、Worldbuilder、AMJ Environment、AMJ WorldMap** を有効化する。
+3. RimWorldを再起動し、新規ワールド生成時に **Worldbuilderのプリセット選択画面**から **AMJ Japan World (Prototype)** を選択する。通常のランダムワールド設定に地図が自動で現れる方式ではない。
 
-1. [Project Actions #39022443969](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/39022443969) から [AMJ-Japan-World-Prototype-1.6 のZIP成果物](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/39022443969/artifacts/12097720526) を取得する（GitHubでProjectへのアクセスが必要な場合あり）。
-2. ZIPを展開した**Modルート**に `About/About.xml`, `Assemblies/AMJJapanWorldPresetRestore16.dll`, `Worldbuilder/AMJ_Japan_World_Prototype/Preset.xml`, `Worldbuilder/AMJ_Japan_World_Prototype/TerrainData.xml` が揃っていることを確認する。
-3. `RimWorld/Mods/AMJ-Japan-World-Prototype/` へそのフォルダ構成を置き、**Harmony、Vanilla Expanded Framework、Worldbuilder、AMJ Environment** を有効化する。
-4. RimWorld **1.6** を起動し、**Worldbuilderのプリセット選択画面**で `AMJ Japan World (Prototype)` を選ぶ。通常のランダムワールド作成一覧に独立した地図選択肢として出ることは保証していない。
+配置の基準（`RimWorld/Mods/Ancient-Medieval-Japan-WorldMap/`直下）：
 
-**注意：** これは元の1.6試作成果物。形状確認には利用できるが、その後GitHub上で修正した**海上派閥拠点、標高データ、入植可能な山地、霊山の制限を反映した新ビルドではない**。修正版の新たな実ゲーム受入は未完了で、1.7対応も未確認。既存セーブへの途中導入や削除は推奨しない。上記Actions成果物は保持期限付きである。
+```text
+About/About.xml
+Assemblies/AMJJapanWorldPresetRestore16.dll
+Worldbuilder/AMJ_Japan_World_Prototype/Preset.xml
+Worldbuilder/AMJ_Japan_World_Prototype/TerrainData.xml
+```
 
-## 開発ソース
+**重要 — 同梱内容のバージョン：** `Assemblies` と `Worldbuilder` の3ファイルは **Project Actions #39022443969で検証された元の2026-10-17形状試作版**。後から変更した新しい海上派閥拠点・DEM10B標高・高山入植可能性・霊山山頂のソース修正は**まだ再ビルドされておらず、この配布ファイルには反映されていない**。その4件を未修正のまま遊ぶための試作版であることに注意。1.7は未確認。既存の固定マップセーブへの途中導入・削除には非対応。
 
-- [正式設計、作業状態・実ゲーム検証範囲](Docs/Design.md)
-- [現在の作業引き継ぎ](Docs/Coordination.md)
-- [本番Modメタデータの正本](About/About.xml)
-- [ワールド生成・復元用C#とビルドPython](Tools/Production/)
-- [海岸線・DEM10B標高・気候の入力処理](Tools/Research/)
-- [旧Project側の研究履歴](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Research/JapanWorldMapCandidate.md)
+## 実ゲーム検証・来歴
 
-本番生成スクリプト `Tools/Production/build_japan_world_preset16.py` は、このリポジトリのルート `About/About.xml` をパッケージへ複製する。独立したModとしての公開は未承認。地図を構成する第三者原データ・ゲーム本体・Worldbuilderバイナリの無断再配布は行わない。
+原型のLinux RimWorld 1.6で、ワールド生成・拠点形成・セーブ・ロードを [Project Actions #39022443969](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/actions/runs/39022443969) で確認済み。作者による形状の目視確認も合格。今回のリポジトリ取り込み後の別環境でのクローン動作は、**同一プリセット/DLLのバイト照合とファイル配置の静的確認であり、新たな実ゲームPASSではない**。
+
+- [正式設計・作業とテストの受入条件](Docs/Design.md)
+- [作業状態と担当区分](Docs/Coordination.md)
+- [旧原型ZIPのデータソース・ライセンス表記](Docs/DataProvenance.md)
+- [Modメタデータの正本](About/About.xml)
+- [今後のワールド生成・復元の実装ソース](Tools/Production/)
+- [海岸線・新しいDEM10B・気候モデルの生成ソース](Tools/Research/)
+- [Project側の旧研究履歴](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Research/JapanWorldMapCandidate.md)
+
+Steam Workshopでの正式公開は未承認。次に新しい修正済みプリセットを生成したときは、**元の旧試作版であることを明示したまま放置せず、実ゲーム検証後に同梱DLL/XMLを差し替える**。

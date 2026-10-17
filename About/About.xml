@@ -44,6 +44,8 @@ Adds an optional, fixed Worldbuilder map representing the Japanese archipelago, 
 
 The current prototype includes Honshu, Shikoku, Kyushu and selected nearby islands. Hokkaido and the Ryukyu Islands are outside its current scope. The main island outlines have been reviewed in-game; historic geographic accuracy is still being developed.
 
+Bundled map and DLL are the original author-playtested 1.6 shape prototype, not a rebuild of subsequent source fixes.
+
 Known issues being corrected: faction settlements on ocean tiles; underrepresented subalpine and alpine zones; insufficient settleable high-mountain tiles. The intended result preserves settleable ordinary highlands while making the summit tiles of Mount Fuji, Tateyama and Hakusan impassable alpine terrain. These fixes have not yet passed final gameplay acceptance.
 
 Requires Harmony, Vanilla Expanded Framework, Worldbuilder and AMJ Environment. Choose "AMJ Japan World (Prototype)" through Worldbuilder when starting a new world. This is an optional add-on; it does not change AMJ Environment's ordinary procedural world generation.
@@ -57,6 +59,8 @@ RimWorld 1.6向け開発試作版。一般公開に必要な確認は未完了�
 Worldbuilderを利用し、日本列島を再現する固定ワールドマップを追加する。AMJ Environmentのバイオームを使用し、標高・山地・気候を日本向けに仮設定する。
 
 本州・四国・九州と周辺の一部の島々を含む。北海道・琉球諸島は現時点で対象外。列島の大まかな形状は実ゲームで確認済みだが、地形や生態分布の再現は開発途中。
+
+同梱した地図データとDLLは、形状確認済みの旧1.6試作版。後からソースで修正した内容は、まだ新たにビルド・反映されていない。
 
 現在修正中の問題：海上の派閥拠点、亜高山・高山帯の不足、山岳の入植可能地の不足。一般の高山には入植可能地を残し、富士山・立山・白山の山頂タイルは入植不可の高山にする。これらの修正は実ゲームでの最終確認が未完了。
 
