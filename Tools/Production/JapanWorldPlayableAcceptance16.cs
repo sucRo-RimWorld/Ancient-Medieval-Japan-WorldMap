@@ -110,6 +110,13 @@ namespace AncientMedievalJapan.WorldMap
                 throw new InvalidDataException(
                     "Generated nonplayer faction bases remain on sea or inaccessible Japan land: " +
                     invalidFactionSites + " of " + factionSites);
+            // At a minimum, the new measured DEM must strictly improve
+            // both highland biome counts over the previously verified z8
+            // source; a quota is not used to change the classification.
+            if (subalpine <= 1268 || alpine <= 33)
+                throw new InvalidDataException(
+                    "Mountain DEM source did not improve scarce highland zones: " +
+                    "subalpine=" + subalpine + " alpine=" + alpine);
             if (subalpineFree < 1 || alpineFree < 1 || protectedSummits != 3)
                 throw new InvalidDataException(
                     "Highland settlement / Fuji-Tateyama-Hakusan summit contract failed: " +
