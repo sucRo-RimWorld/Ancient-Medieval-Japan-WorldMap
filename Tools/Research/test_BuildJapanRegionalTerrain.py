@@ -87,7 +87,7 @@ class Tests(unittest.TestCase):
             self.assertEqual({(x[4],x[5]) for x in land},{pos})
             cache=d/'cache';cache.mkdir()
             Image.new('RGB',(256,256),pixel_height(1000)).save(
-                cache/f'demgm_png_{m.Z}_{pos[0]}_{pos[1]}.png')
+                cache/f'dem10b_png_{m.Z}_{pos[0]}_{pos[1]}.png')
             r=m.build(mask,d/'out.csv',d/'report.json',cache=cache)
             self.assertEqual(r['status'],'COMPLETE_RESEARCH')
             self.assertEqual(r['sampled_elevation_count'],13)
@@ -142,7 +142,7 @@ class Tests(unittest.TestCase):
             cache=d/'cache';cache.mkdir()
             img=Image.new('RGB',(256,256),pixel_height(0))
             img.putpixel((px,py),(128,0,0))
-            name=cache/f'demgm_png_{m.Z}_{x}_{y}.png'
+            name=cache/f'dem10b_png_{m.Z}_{x}_{y}.png'
             img.save(name)
             qa=m.build(mask,d/'out.csv',d/'r.json',cache=cache)
             self.assertEqual(qa['status'],'PARTIAL_RESEARCH')
@@ -162,19 +162,19 @@ class Tests(unittest.TestCase):
             cache=d/'cache';cache.mkdir()
             for x,y in coords:
                 Image.new('RGB',(256,256),pixel_height(100)).save(
-                    cache/f'demgm_png_{m.Z}_{x}_{y}.png')
+                    cache/f'dem10b_png_{m.Z}_{x}_{y}.png')
             r=m.build(mask,d/'out.csv',d/'report.json',cache=cache)
             self.assertEqual(len(r['elevation_resolution_checkpoints']),6)
             self.assertFalse(r['elevation_resolution_checkpoints_acceptance'])
             fuji=r['elevation_resolution_checkpoints']['Fuji']
             self.assertEqual(fuji['status'],'COMPARE_ONLY')
-            self.assertEqual(fuji['sample_demgm_z8_m'],100)
-            self.assertAlmostEqual(fuji['z8_minus_reference_m'],100-3740.44)
+            self.assertEqual(fuji['sample_dem10b_z9_m'],100)
+            self.assertAlmostEqual(fuji['z9_minus_reference_m'],100-3740.44)
             self.assertEqual(r['sampled_elevation_count'],13)
             self.assertEqual(r['status'],'COMPLETE_RESEARCH')
             self.assertEqual(r['requested_source_tiles'],len(coords))
             r2=m.build(mask,d/'out2.csv',d/'report2.json')
-            self.assertEqual(r2['elevation_resolution_checkpoints']['Fuji']['status'],'MISSING_Z8')
+            self.assertEqual(r2['elevation_resolution_checkpoints']['Fuji']['status'],'MISSING_Z9')
 
     def test_mask_validation_and_tile_limit(self):
         with tempfile.TemporaryDirectory() as td:
