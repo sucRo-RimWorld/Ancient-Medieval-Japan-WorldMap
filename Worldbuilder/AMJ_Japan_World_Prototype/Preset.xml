@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<worldPreset>
+	<name>AMJ_Japan_World_Prototype</name>
+	<label>AMJ Japan World (Prototype)</label>
+	<difficulty>0</difficulty>
+	<sortPriority>0</sortPriority>
+	<biomes>
+		<li>Ocean</li>
+		<li>AMJ_WarmTemperateForest</li>
+		<li>AMJ_CoolTemperateForest</li>
+		<li>AMJ_SubalpineForest</li>
+		<li>AMJ_AlpineZone</li>
+	</biomes>
+	<landmarks IsNull="True" />
+	<features>
+		<li>River</li>
+		<li>Mountain</li>
+		<li>Coast</li>
+	</features>
+	<description>Japan-only modern coastline, JMA-station-interpolated rainfall and DEM-based terrain/river routing. Geographic wetlands and medieval climate remain provisional.</description>
+	<saveTerrain>True</saveTerrain>
+	<scenParts IsNull="True" />
+	<scenPartDefs IsNull="True" />
+	<customizationDefaults>
+		<keys />
+		<values />
+	</customizationDefaults>
+	<factionSettlementCustomizationDefaults IsNull="True" />
+	<factionNameOverrides IsNull="True" />
+	<factionDescriptionOverrides IsNull="True" />
+	<factionIconOverrides IsNull="True" />
+	<factionIdeoIconOverrides IsNull="True" />
+	<factionColorOverrides IsNull="True" />
+	<factionPopulationOverrides IsNull="True" />
+	<presetStories />
+	<savedFactionDefs IsNull="True" />
+	<savedIdeoFactionMapping IsNull="True" />
+	<savedSettlementsData IsNull="True" />
+	<savedMapMarkersData IsNull="True" />
+	<savedMapTextFeaturesData IsNull="True" />
+	<worldInfo>
+		<name>Algorab XV</name>
+		<planetCoverage>1</planetCoverage>
+		<seedString>AMJ-Japan-World-1.6-Prototype</seedString>
+		<persistentRandomValue>-557920083</persistentRandomValue>
+		<overallRainfall>Normal</overallRainfall>
+		<overallTemperature>Normal</overallTemperature>
+		<initialMapSize>(250, 1, 250)</initialMapSize>
+		<factions IsNull="True" />
+	</worldInfo>
+	<generationData IsNull="True" />
+</worldPreset>
