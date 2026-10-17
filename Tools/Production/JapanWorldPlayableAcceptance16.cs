@@ -61,6 +61,8 @@ namespace AncientMedievalJapan.WorldMap
                 throw new InvalidDataException("Japan preset did not generate a valid player home map");
             var surface = Find.WorldGrid.Surface;
             int land = 0, roads = 0, seaRivers = 0, seaMutators = 0;
+            int subalpine = 0, alpine = 0, subalpineFree = 0, alpineFree = 0;
+            int protectedSummits = 0, invalidFactionSites = 0, factionSites = 0;
             for (int i = 0; i < surface.TilesCount; i++)
             {
                 var tile = surface[i];
@@ -70,8 +72,49 @@ namespace AncientMedievalJapan.WorldMap
                 {
                     if (tile.potentialRivers != null) seaRivers += tile.potentialRivers.Count;
                     if (tile.Mutators.Count > 0) seaMutators += tile.Mutators.Count;
+                    continue;
                 }
+
+                // The author's acceptance is about settlement-capable
+                // *mountain climate* tiles, not raw biome percentages alone.
+                string biome = tile.PrimaryBiome == null ? "" : tile.PrimaryBiome.defName;
+                bool sub = biome == "AMJ_SubalpineForest";
+                bool high = biome == "AMJ_AlpineZone";
+                if (!sub && !high) continue;
+                if (sub) subalpine++;
+                if (high) alpine++;
+                if (high && tile.hilliness == Hilliness.Impassable) protectedSummits++;
+                if (tile.hilliness == Hilliness.Impassable ||
+                    Find.WorldObjects.AnyWorldObjectAt(tile.tile) ||
+                    !TileFinder.IsValidTileForNewSettlement(tile.tile))
+                    continue;
+                if (sub) subalpineFree++;
+                if (high) alpineFree++;
             }
+            foreach (var site in Find.World.worldObjects.worldObjects.OfType<Settlement>())
+            {
+                if (site.Faction == null || site.Faction.IsPlayer) continue;
+                factionSites++;
+                if (!site.Tile.Valid || site.Tile.Layer != surface ||
+                    Find.WorldGrid[site.Tile].WaterCovered ||
+                    Find.WorldGrid[site.Tile].hilliness == Hilliness.Impassable)
+                    invalidFactionSites++;
+            }
+            Log.Message("[AMJ Japan acceptance] highland geography: subalpine=" +
+                subalpine + " eligible=" + subalpineFree +
+                " alpine=" + alpine + " eligible=" + alpineFree +
+                " protectedSummits=" + protectedSummits +
+                " factionSites=" + factionSites + " invalidFactionSites=" +
+                invalidFactionSites);
+            if (invalidFactionSites != 0)
+                throw new InvalidDataException(
+                    "Generated nonplayer faction bases remain on sea or inaccessible Japan land: " +
+                    invalidFactionSites + " of " + factionSites);
+            if (subalpineFree < 1 || alpineFree < 1 || protectedSummits != 3)
+                throw new InvalidDataException(
+                    "Highland settlement / Fuji-Tateyama-Hakusan summit contract failed: " +
+                    "subalpineFree=" + subalpineFree + " alpineFree=" +
+                    alpineFree + " protectedSummits=" + protectedSummits);
             if (land != 50810 || roads != 0 || seaRivers != 0 || seaMutators != 0)
                 throw new InvalidDataException("Japan Worldbuilder terrain data did not survive restore: " +
                     "land=" + land + " roads=" + roads + " seaRivers=" + seaRivers +
