@@ -56,6 +56,19 @@ Worldbuilder 1.6 calls its terrain restoration **after** Vanilla generation, in 
 
 **Sequence:** implement and review the intermediate-temperate WorldMap biome and any necessary genuine shared plants first. **Only afterward** revise the fixed Japan distribution of Cool/Subalpine/Alpine and other north/south forest types; a 10°C/2°C temperature-threshold experiment was an unapproved discussion, not an adopted balance value. The independently identified terrain `Hilliness`/DEM neighbor-relief issue and excessive faction-base density can be addressed separately from this distribution sequence. The author-approved coastline remains untouched. No 1.7, Workshop or native PASS follows from a design decision.
 
+## 2026-10-20 季節・農耕暦とWorldMapの実地理緯度 — 未解決の重要な連携課題
+
+**発見と限定:** 作者はAMJの季節・農耕暦の検討時にWorldMapとの連携も考慮すると表明。現在のWorldMap本番生成ソース `Tools/Research/ProjectJapanCoastlineToTiles.py` の既定の座標変換は、**GIS北緯36° → RimWorld仮想緯度0°、仮想緯度倍率13倍** (`gis_lat=36.0, virtual_lat=0.0, latitude_scale=13.0`) である。`Tools/Production/build_japan_world_preset16.py` はこの投影ツールを追加の緯度上書きなしで呼び出す。これは地形を認識できる大きさへ引き延ばすための仮想球体座標で、**本来の日本の実緯度ではない**。概算例: GIS北緯32°→ゲーム南緯52°、GIS北緯35°→ゲーム南緯13°、GIS北緯36°→ゲーム赤道、GIS北緯41°→ゲーム北緯65°。地理的な形状を保持しているだけで「日本の春夏秋冬や日照も再現済み」という意味ではない。
+
+**既存RimWorldとの干渉:** 通常のRimWorldは地図タイルの `WorldGrid.LongLatOf` で得る緯度から `GenDate.Season` / `SeasonUtility` 等の季節表示、日照時間、季節気温差を計算する。南半球では季節の位相が逆転する。WorldMapでは日本列島の南半分に仮想負緯度があるため、**季節位相・日照・屋外気温の年内推移が、日本の実地理とずれる強い構造的リスク**がある。WorldMapによるJMA月別気温を利用したGISベースの**年平均** `tile.temperature` 設定は、この仮想緯度ベースの年内変動や光周期の整合性を自動で証明しない。
+
+- **優先する確認:** 対象Worldbuilder presetが選択されたときに限り、南側・中央・北側の代表タイルについて、実GIS緯度、ゲーム仮想緯度、季節名、月相当の最高/最低気温、日照時間、作物の生育可能期間を一体で検証する。現行の1.6新世界/セーブ再ロードPASSはこの季節整合性を検証しておらず、季節補正PASSとは呼ばない。
+- **境界と設計の保留:** 修正の具体的技術（実GIS緯度の保存・提供、WorldMap-onlyのSeason/日照/気温補正、固定地図を北半球に配置し直す案など）は**未選択**。単純に `GenDate` を全ワールドへグローバルパッチしたり、Environmentのランダム地形・気温モデル、Grainsの作物 `growDays`、CCTOの休眠/枯死閾値を書き換えない。座標の持ち方が変わるとワールド形状・既存セーブにも影響し得るので、それを先に検討する。
+- **他Mod連携:** 将来の祭礼・芸能子Modが「収穫期」「春の行事」などを扱う際、WorldMap利用時に実地理に整合した局所季節を参照できる方法を**検討**する。WorldMap非導入時はRimWorld標準の季節・気温・生育イベントで動く構成を維持する。農耕暦そのものをGrainsに強制しない。祭礼子ModやGrainsがWorldMap必須となることを意味しない。
+- **既存の優先度を維持:** これは作者指摘に基づく既存WorldMapの季節整合性の監査課題であり、即時の大規模改修、追加nativeテスト、1.7互換、公開を承認しない。WorldMapの既存残作業・低い実行優先度と、Environment/Grains/Cultureの現行作業を尊重する。
+
+**根拠:** [WorldMap投影ソース](../Tools/Research/ProjectJapanCoastlineToTiles.py)、[WorldMap地形出力](../Tools/Production/JapanWorldPresetBuilder16.cs)、[RimWorld `GenDate.Season` Decompile](https://github.com/josh-m/RW-Decompile/blob/master/RimWorld/GenDate.cs)、[RimWorld季節と緯度](https://rimworldwiki.com/wiki/World_generation)。**判定の状態:** 投影式はソースで確定、影響はRimWorldの通常の緯度依存モデルからの論理的帰結。**現行WorldMap本番DLLについて季節別のNative実測は未実施**。
+
 ## Ownership boundary, backlog and stop
 
 1. **Environment** owns the existing four general-purpose climate/biome identities, shared species/PlantDefs, scenery resources and wild-food integration, including ordinary random-world ecology. **WorldMap** owns additional **Japan-fixed-preset-only BiomeDefs**, including the intermediate-temperate forest and possible geographic regional variants, their biome-local plant weighting and tile assignment. Distinct WorldMap biome identity is authorized; duplicating or redefining Environment's existing BiomeDefs/ThingDefs is not.
