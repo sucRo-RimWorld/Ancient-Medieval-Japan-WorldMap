@@ -1,5 +1,13 @@
 # AMJ WorldMap Coordination (main only)
 
+## WORLDMAP-CULTURE-SEASON-LATITUDE-20261020 — seasonal-culture handoff, do not start new runtime work
+
+**Author request:** AMJの季節・農耕暦の検討ではWorldMapとの連携も考慮する。**WorldMap Design accepted review finding:** [WorldMap PR #13](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-WorldMap/pull/13) main `39d1fd0734b6adb48ff1a32a17b816ee8a75ed0b` records that the actual production projection in `Tools/Research/ProjectJapanCoastlineToTiles.py` maps GIS北緯36° to native仮想緯度0° and stretches latitude by ×13. For real southern Japan, native WorldGrid latitude becomes negative: **RimWorld standard local season / day length and seasonal temperature phase can therefore disagree with geography.** Existing 1.6 native world/save PASS did **not** inspect seasonal values. No tested correction exists.
+
+**WorldMap owner follow-up at next authorized season-relevant implementation:** Determine the smallest WorldMap-only solution for *native season / sun / ambient temperature coherence* using original GIS latitude, gated to its selected Worldbuilder preset, without changing Environment's normal random-world climate/vegetation, Grains growDays/CCTO frost logic, or forcing a WorldMap dependency in Culture/Grains/future festivals. Check south/center/north sample colony tiles over the 60-day year **only when such implementation is actually scheduled**. Coordination counterpart: [Project culture audit](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/blob/main/Docs/Research/MedievalCultureCoverageAudit-2026-10-20.md) via [Project PR #867](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Project/pull/867), main `79faf27ac3a9a03dd10ef4d847885c0c69012881`.
+
+**Status:** audit/coordination only, no feature/code change, no native season validation, no new release permission. Existing **LOW execution priority** and earlier geographic backlog remain intact. Formal technical risk and decisions live in WorldMap `Docs/Design.md`, not in this handoff.
+
 Current work status and cross-chat handoff only. Confirmed specifications, limitations and numbers are owned by `Docs/Design.md`, `Docs/DataProvenance.md`, `Docs/Data/` and production source, not by this status document.
 
 ## WORLDMAP-RESUME-HANDOFF-20261018 — low-priority backlog; stop here
