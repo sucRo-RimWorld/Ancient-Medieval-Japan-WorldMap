@@ -69,6 +69,32 @@ Worldbuilder 1.6 calls its terrain restoration **after** Vanilla generation, in 
 
 **根拠:** [WorldMap投影ソース](../Tools/Research/ProjectJapanCoastlineToTiles.py)、[WorldMap地形出力](../Tools/Production/JapanWorldPresetBuilder16.cs)、[RimWorld `GenDate.Season` Decompile](https://github.com/josh-m/RW-Decompile/blob/master/RimWorld/GenDate.cs)、[RimWorld季節と緯度](https://rimworldwiki.com/wiki/World_generation)。**判定の状態:** 投影式はソースで確定、影響はRimWorldの通常の緯度依存モデルからの論理的帰結。**現行WorldMap本番DLLについて季節別のNative実測は未実施**。
 
+## 2026-10-29 外部地球マップModの前提化候補 — 暫定調査順位／採用未決定
+
+**検討の目的:** 日本だけを仮想球体へ大きく引き延ばす現行固定プリセットでは、実GIS北緯36°がゲーム内緯度0°、南北方向×13となり、南日本の季節位相や日照が逆転し得る。日本の実緯度・季節とゲーム用の土地面積／地形分解能を両立できるなら、既存の地球マップModを **AMJ WorldMapだけの外部前提Mod** にして地形生成を再利用する案を調べる。Environmentその他のAMJ Modを地球マップ必須にはしない。
+
+**今回の選定は調査順であり、依存先の確定・独自プリセットの破棄・実装指示・Workshop公開許可ではない。** 2026-10-29時点ではWorkshopの掲載情報を中心に比較した段階で、下記候補の実配布DLL/Defs、正確なpackageId、コード、実生成ワールドを確認できていない。2game掲載の機能説明にはAI要約を含むため、作者実装・ゲーム内挙動の証明として使わない。
+
+| 調査順位 | 候補 / Workshop | 比較上の理由 | 未確認・注意点 |
+|---|---|---|---|
+| **1（暫定）** | [Terra: Real Earth World Map](https://steamcommunity.com/sharedfiles/filedetails/?id=3822011224)（ID 3822011224） | 全地球地形を提供するという掲載説明。別Mod [Terra Nations](https://steamcommunity.com/sharedfiles/filedetails/?id=3822011405) が必須依存先として利用するという公開説明があり、アドオン方式の参考になる。 | 実際の生成方式、緯度／季節／日照、RimWorld 1.6実動作、日本タイル密度、Environmentとの競合、再利用可能なAPIは未検証。依存型アドオン例があることはAMJ互換性の証拠ではない。 |
+| **2（暫定）** | [RimEarth](https://steamcommunity.com/sharedfiles/filedetails/?id=3828317506)（ID 3828317506） | 地形・気温・降雨・季節・局所地形まで実地球データに基づくとする掲載説明から、単なる地形以上の再利用余地がある。 | 新規公開のため実装・季節計算・気候データの品質と日本の解像度は未確認。Environmentの気候／地形処理と競合する可能性がある。 |
+| **比較参考** | [[Worldbuilder] The Earth](https://steamcommunity.com/sharedfiles/filedetails/?id=3534543546)（ID 3534543546） | 現行WorldMapと同じWorldbuilderプリセット方式の比較対象。 | 既存地球プリセットに実緯度を独立保存する仕組みは確認できない。前提化で季節問題が自動解消すると扱わない。 |
+| **優先度低** | [SNAFU - JapanWorld (no factions)](https://steamcommunity.com/sharedfiles/filedetails/?id=3547528258)（ID 3547528258） | 大型の日本専用プリセットとして過去に再利用調査済み。 | 日本拡大方式の緯度問題を直接解消するものではない。出典・二次利用許諾・地形整合性は旧調査でも未解決。 |
+
+**外部前提化による設計境界:** WorldMapが地球ワールド生成を外部Modへ委ねるなら、現行のWorldbuilder固定地形復元、地形生成CSV、海上派閥拠点再配置はそのまま重ねず、必要性を再評価する。一方、日本向け地域バイオーム・山岳保護などの追加責務はWorldMap内に残す余地がある。Environmentは従来どおり独立使用可能とする。ただし Environment `WorldGenStep_AMJEnvironmentTerrain.cs` が生成時に標高・海岸・気温・降水量・バイオームを変更し、`ClimatePatches.cs` が季節気温振幅を補正するため、外部地球Modとの生成順・Harmony競合は優先確認事項。前提Mod欄への追加だけでは地形の委譲は成立しない。
+
+**縮尺のトレードオフ:** 現行の日本列島は50,810陸地タイル。全地球へ実面積比で均等に約59万タイルを割り当てる仮想例では、日本全域は約440タイル程度となるが、これは **Terra/RimEarthの実測値ではない**。季節・地球縮尺が自然になる反面、細かな地域差や山岳集落の表現が失われる可能性がある。現行仕様の「陸地は日本のみ」と全地球基盤は異なる目的なので、どちらを採るかは技術的互換性・必要な日本タイル密度を踏まえた作者の別途判断を要する。
+
+**採用判断に必要な最小確認（新規実装・大型テストの許可ではない）:**
+
+1. Terra、RimEarthの実配布物から **packageId・依存・コード／データ形式** と、他Modから地球生成を基盤として利用できる境界を特定する。
+2. 各候補が生成する日本の **内部緯度、季節位相、日照／気温の年推移、利用可能な陸地タイル数、山岳・海岸・河川／入植可能地** を代表地点で確認する。世界の陸地面積比から実装上の解像度を推定して済ませない。
+3. Environment併用で地球形状・標高・気温・バイオームが維持されるかを確認し、両者の責務を最小限で分離可能か判定する。地球を崩さないためにEnvironment本体の通常ワールド動作を無条件に変更しない。
+4. 上記結果と必要なら第三者地図データの利用条件を比較し、**Terra採用／RimEarth採用／現行Worldbuilderプリセット維持** のいずれかを改めて選択する。採用に至るまで `About/About.xml` の必須依存、既存本番XML/DLL、正常動作した1.6プリセット、WorldMapの既存保留課題・低優先度を変更しない。
+
+参考：現行の[WorldMap投影方式](../Tools/Research/ProjectJapanCoastlineToTiles.py)と本書の「2026-10-20 季節・農耕暦」節、[Environment地形生成ソース](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Environment/blob/main/Source/AncientMedievalJapanEnvironment/WorldGenStep_AMJEnvironmentTerrain.cs)、[Environment季節気温処理](https://github.com/sucRo-RimWorld/Ancient-Medieval-Japan-Environment/blob/main/Source/AncientMedievalJapanEnvironment/ClimatePatches.cs)。
+
 ## Ownership boundary, backlog and stop
 
 1. **Environment** owns the existing four general-purpose climate/biome identities, shared species/PlantDefs, scenery resources and wild-food integration, including ordinary random-world ecology. **WorldMap** owns additional **Japan-fixed-preset-only BiomeDefs**, including the intermediate-temperate forest and possible geographic regional variants, their biome-local plant weighting and tile assignment. Distinct WorldMap biome identity is authorized; duplicating or redefining Environment's existing BiomeDefs/ThingDefs is not.
